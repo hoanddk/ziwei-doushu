@@ -1,231 +1,242 @@
+> **Bản fork Việt hoá — chỉ dùng cá nhân**
+>
+> Đây là bản dịch tiếng Việt của [Renhuai123/ziwei-doushu](https://github.com/Renhuai123/ziwei-doushu) (engine lập lá số Tử Vi Đẩu Số theo hệ Nghê Hải Hạ «Thiên Kỷ»), do tôi dịch để dùng cá nhân. Bản gốc tiếng Trung được giữ nguyên tại [README.zh-CN.md](./README.zh-CN.md).
+>
+> Giấy phép từng phần (không đổi so với repo gốc):
+> - Code + tài liệu: **MIT** (xem [LICENSE](./LICENSE)) — dịch và dùng tự do, kể cả thương mại, chỉ cần giữ lại dòng bản quyền.
+> - Bộ dữ liệu v3.0/v4.0: **CC BY 4.0** (xem [DATASET-LICENSE](./DATASET-LICENSE)) — dùng được kể cả thương mại, ghi rõ nguồn.
+> - Cổ thư (Cốt Tủy Phú, Toàn Tập, Toàn Thư): **phạm vi công cộng**.
+> - 1.848 trích dẫn «Thiên Kỷ» của Nghê Hải Hạ: **CC BY-NC-SA 4.0** — chỉ dùng phi thương mại. Bản dịch này chỉ phục vụ mục đích cá nhân, không quảng cáo, không thu phí.
+>
+> Ghi chú bản dịch: repo gốc chưa có hệ i18n nên bản này dịch trực tiếp chuỗi giao diện trong code (xem mục «Ghi chú bản dịch» ở cuối file). Tên sao, cung, can chi dùng theo cách gọi Hán–Việt quen thuộc trong Tử Vi Việt Nam; tên riêng, số liệu và đường link giữ nguyên.
+
 <div align="center">
 
-# 紫微斗数 · 开源排盘引擎
+# Tử Vi Đẩu Số · Engine lập lá số mã nguồn mở
 
-### 算法是公开的传统智慧，不应该被锁在围墙里
+### Thuật toán là trí tuệ truyền thống công khai, không nên bị nhốt trong tường rào
 
 [![CI](https://github.com/Renhuai123/ziwei-doushu/actions/workflows/ci.yml/badge.svg)](https://github.com/Renhuai123/ziwei-doushu/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](./LICENSE)
 [![Dataset: CC BY 4.0](https://img.shields.io/badge/dataset-CC%20BY%204.0-green.svg)](./DATASET-LICENSE)
 
-**中文** · [English](./README.en.md)
+**Tiếng Việt** · [中文](./README.zh-CN.md) · [English](./README.en.md)
 
 </div>
 
-**一、项目理念**：紫微斗数是中国传统命理学的瑰宝，倪海厦老师在《天纪》中系统梳理了正宗的紫微斗数体系。我们希望通过技术手段让更多人接触和学习这门学问。
+**I. Ý tưởng dự án**: Tử Vi Đẩu Số là báu vật của mệnh lý truyền thống Trung Hoa, thầy Nghê Hải Hạ đã hệ thống hoá trường phái Tử Vi Đẩu Số chính tông trong «Thiên Kỷ». Chúng tôi mong qua công nghệ để nhiều người tiếp cận và học môn này hơn.
 
-开源排盘算法和知识库，是因为我们相信：**算法是公开的传统智慧，不应该被锁在围墙里**。真正的价值在于解读的深度、用户体验的打磨、以及持续运营的积累。
+Mở mã nguồn thuật toán lập lá số và kho tri thức, vì chúng tôi tin rằng: **thuật toán là trí tuệ truyền thống công khai, không nên bị nhốt trong tường rào**. Giá trị thật nằm ở chiều sâu luận giải, ở việc mài giũa trải nghiệm người dùng và ở tích luỹ vận hành bền bỉ.
 
-**二、项目信息**：基于<strong>倪海厦《天纪》</strong>教学体系的紫微斗数排盘系统，包含完整排盘算法、四化系统、格局知识库、古籍原文数据，以及一套完整开源的紫微斗数解读数据：**v4.0 解读数据集——67.5 万张命盘 × 13 维 = 877 万段解读，正文约 204 亿字，解压后 56.6 GB**（2026-10-15 发布）。
+**II. Thông tin dự án**: Hệ thống lập lá số Tử Vi Đẩu Số theo hệ giảng dạy «Thiên Kỷ» của Nghê Hải Hạ, gồm thuật toán lập lá số đầy đủ, hệ Tứ Hóa, kho tri thức cách cục, dữ liệu cổ thư nguyên văn, cùng một bộ dữ liệu luận giải Tử Vi Đẩu Số mã nguồn mở hoàn chỉnh: **bộ dữ liệu luận giải v4.0 — 675 nghìn lá số × 13 chiều = 8,77 triệu đoạn luận giải, chính văn khoảng 20,4 tỉ chữ, giải nén 56,6 GB** (phát hành 15/10/2026).
 
-| 数据集 | 命盘 | 解读段数 | 解压后 | 覆盖年份 | 每张盘解读字数 |
+| Bộ dữ liệu | Lá số | Số đoạn luận giải | Sau giải nén | Bao phủ năm | Số chữ luận giải mỗi lá |
 |---|---|---|---|---|---|
-| **v4.0 解读数据集**（2026-10-15） | **674,976** | **8,774,688** | **56.6 GB** | **1950–2026**（只含真实日期） | **约 3.0 万字** |
-| v3.0 样本数据集 | 518,400 | 6,739,200 | 33.1 GB | 1924–1983 | 约 2.1 万字 |
-| 变化 | +30% | +30% | **+71%** | +17 年 | +44% |
+| **Bộ dữ liệu luận giải v4.0** (15/10/2026) | **674.976** | **8.774.688** | **56,6 GB** | **1950–2026** (chỉ ngày thật) | **khoảng 30.000 chữ** |
+| Bộ dữ liệu mẫu v3.0 | 518.400 | 6.739.200 | 33,1 GB | 1924–1983 | khoảng 21.000 chữ |
+| Thay đổi | +30% | +30% | **+71%** | +17 năm | +44% |
 
-<sub>v3.0 每张盘解读字数按 2,160 张盘抽样估算，其余数字为全量统计；两版每张盘都是 13 维。</sub>
+<sub>Số chữ mỗi lá của v3.0 ước tính theo mẫu 2.160 lá, các con số còn lại thống kê toàn bộ; cả hai bản mỗi lá đều có 13 chiều.</sub>
 
-在线体验：[ouranic.cn](https://ouranic.cn/?from=gh-readme)，排盘、AI 解读、命盘历史全部开放。
+Trải nghiệm trực tuyến: [ouranic.cn](https://ouranic.cn/?from=gh-readme), lập lá số, AI luận giải, lịch sử lá số đều mở.
 
-> **注：关于六亲判断**
+> **Lưu ý: về luận đoán lục thân**
 >
-> 紫微斗数在六亲（父母、兄弟、子女等）判断上存在一定局限。倪师在《天纪》中指出：“斗数批六亲本来就比较差一点。”（[2上 · 00:25:27](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=1527)）在传统术数中，铁板神数在核对六亲方面有其独特优势（[2上 · 00:03:15](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=195)）；倪师仍以紫微斗数为核心，是因为它能结合地理、环境与人事进行综合判断，形成“上知天文、下知地理、中知人事”的完整体系（[2上 · 00:25:43](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=1543)）。因此，与六亲相关的分析仅供参考；[ouranic.cn](https://ouranic.cn/?from=gh-readme) 上父母、兄弟、子女三个维度也附有同样的说明。
+> Tử Vi Đẩu Số khi luận lục thân (cha mẹ, anh em, con cái…) có giới hạn nhất định. Thầy Nghê trong «Thiên Kỷ» có nói: «Đẩu số luận lục thân vốn kém hơn một chút.» ([2 thượng · 00:25:27](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=1527)) Trong thuật số truyền thống, Thiết Bản Thần Số có ưu thế riêng trong việc đối chiếu lục thân ([2 thượng · 00:03:15](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=195)); thầy Nghê vẫn lấy Tử Vi Đẩu Số làm cốt lõi, vì nó có thể kết hợp địa lý, môi trường và nhân sự để luận đoán tổng hợp, thành hệ thống hoàn chỉnh «trên biết thiên văn, dưới biết địa lý, giữa biết nhân sự» ([2 thượng · 00:25:43](https://www.bilibili.com/video/BV1KJsLekEfA?p=3&t=1543)). Vì vậy, phân tích liên quan đến lục thân chỉ để tham khảo; trên [ouranic.cn](https://ouranic.cn/?from=gh-readme), ba chiều cha mẹ, anh em, con cái cũng có cùng lưu ý này.
 
 ---
 
-## 目录
+## Mục lục
 
-| | 章节 | 一句话 |
+| | Chương | Một câu |
 |---|------|--------|
-| 一 | [本轮更新](#一本轮更新2026-10-15) | 13 维断语按倪师原话与《全书》逐句校正，发布 67.5 万命盘 × 13 维解读数据集 v4.0 |
-| 二·新 | [13 维解读数据集 v4.0](#二新13-维解读数据集-v402026-10-15) | 2026-10-15 新版断语，67.5 万命盘，按年份下载 |
-| 二 | [51.8 万命盘样本数据集](#二518-万命盘样本数据集) | 规格、下载、用途、许可 |
-| 三 | [快速开始](#三快速开始) | 克隆到跑起来 |
-| 四 | [排盘引擎](#四排盘引擎) | 能做到什么、文件怎么分、古籍数据 |
-| 五 | [倪师《天纪·紫微斗数》原话](#五倪师天纪紫微斗数原话) | 14 讲 + 2 段补充、1848 条，一图看全，每条可回放 |
-| 六 | [界面是一份 Demo](#六界面是一份-demo) | 不是线上那套，差距写明 |
-| 七 | [开源边界](#七开源边界什么不在里面) | 什么开源、什么不开源 |
-| 八 | [维护节奏与贡献](#八维护节奏与贡献) | 同步节奏、issue / PR 口径 |
-| 九 | [协议](#九协议) | 代码 MIT / 数据 CC BY 4.0 / 古籍公版 / 倪师原话非商用 |
-| 十 | [关于与联系](#十关于与联系) | 项目理念、技术栈、联系方式 |
+| I | [Đợt cập nhật này](#i-đợt-cập-nhật-này-15102026) | Câu luận 13 chiều hiệu đính từng câu theo lời thầy Nghê và «Toàn Thư», phát hành bộ dữ liệu 675 nghìn lá số × 13 chiều v4.0 |
+| II·mới | [Bộ dữ liệu luận giải 13 chiều v4.0](#ii-mới-bộ-dữ-liệu-luận-giải-13-chiều-v40-15102026) | Bản câu luận mới 15/10/2026, 675 nghìn lá số, tải theo năm |
+| II | [Bộ dữ liệu mẫu 518 nghìn lá số](#ii-bộ-dữ-liệu-mẫu-518-nghìn-lá-số) | Quy cách, tải về, công dụng, giấy phép |
+| III | [Bắt đầu nhanh](#iii-bắt-đầu-nhanh) | Clone về là chạy được |
+| IV | [Engine lập lá số](#iv-engine-lập-lá-số) | Làm được gì, file chia thế nào, dữ liệu cổ thư |
+| V | [Lời gốc «Thiên Kỷ · Tử Vi Đẩu Số» của thầy Nghê](#v-lời-gốc-thiên-kỷ--tử-vi-đẩu-số-của-thầy-nghê) | 14 bài + 2 đoạn bổ sung, 1.848 câu, xem tổng quan trong một hình, câu nào cũng phát lại được |
+| VI | [Giao diện chỉ là bản Demo](#vi-giao-diện-chỉ-là-bản-demo) | Không phải bộ giao diện trên mạng, khác biệt ghi rõ |
+| VII | [Ranh giới mã nguồn mở](#vii-ranh-giới-mã-nguồn-mở-gì-không-nằm-trong-này) | Cái gì mở, cái gì không mở |
+| VIII | [Nhịp bảo trì và đóng góp](#viii-nhịp-bảo-trì-và-đóng-góp) | Nhịp đồng bộ, khẩu kính issue / PR |
+| IX | [Giấy phép](#ix-giấy-phép) | Code MIT / dữ liệu CC BY 4.0 / cổ thư công cộng / lời thầy Nghê phi thương mại |
+| X | [Về dự án và liên hệ](#x-về-dự-án-và-liên-hệ) | Ý tưởng dự án, công nghệ, liên hệ |
 
 ---
 
-## 一、本轮更新（2026-10-15）
+## I. Đợt cập nhật này (15/10/2026)
 
-本轮跟随网站 2026-10-15 发版（网站内容版本 `ca268829f7a9`）：
+Đợt này theo kịp bản phát hành của website ngày 15/10/2026 (phiên bản nội dung website `ca268829f7a9`):
 
-![本轮更新总览](./docs/update-20261015.png)
+![Tổng quan đợt cập nhật](./docs/update-20261015.png)
 
-**1. 发布 13 维解读数据集 v4.0** —— 674,976 张命盘（公历 1950–2026 年每一个真实日期 × 12 时辰 × 男女）× 13 维 = **8,774,688 段解读**，正文约 204 亿字。解压后 56.6 GB（v3.0 为 33.1 GB，增加 71%），压缩后只有 161 MB，按年份分 77 个文件，可以只下需要的年份，也可以一次下全年份总包。下载见 [Release v4.0-13d](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v4.0-13d)，规格和字段见[第二·新章](#二新13-维解读数据集-v402026-10-15)。发布前 77 个文件逐个解压，与原始数据逐字节比对一致。
+**1. Phát hành bộ dữ liệu luận giải 13 chiều v4.0** —— 674.976 lá số (mỗi ngày thật trong lịch 1950–2026 × 12 giờ × nam/nữ) × 13 chiều = **8.774.688 đoạn luận giải**, chính văn khoảng 20,4 tỉ chữ. Sau giải nén 56,6 GB (v3.0 là 33,1 GB, tăng 71%), sau nén chỉ 161 MB, chia theo năm thành 77 file, có thể chỉ tải năm cần dùng, hoặc tải một lần gói tổng toàn bộ các năm. Tải về xem [Release v4.0-13d](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v4.0-13d), quy cách và trường dữ liệu xem [chương II·mới](#ii-mới-bộ-dữ-liệu-luận-giải-13-chiều-v40-15102026). Trước khi phát hành, 77 file được giải nén từng file và đối chiếu từng byte với dữ liệu gốc, khớp hoàn toàn.
 
-**2. 13 维断语按倪师原话与《全书》原文逐句校正**（断语库仍不开源，校正结果体现在 v4.0 数据集里）：
+**2. Câu luận 13 chiều hiệu đính từng câu theo lời thầy Nghê và nguyên văn «Toàn Thư»** (kho câu luận vẫn không mở, kết quả hiệu đính thể hiện trong bộ dữ liệu v4.0):
 
-- 标着倪师或《全书》却查不到出处的引文，删掉或换成逐字可查的原话；倪师原话注明《天纪》第几集、几分几秒
-- 不会发生的四化（如七杀化权、紫微化忌）相关的句子删去；只在某种条件下才成立的断语补上条件
-- 「力量强时……落陷时……」这类两头说的句子，改为按命盘只显示成立的那一种
-- 健康：哪个脏腑要留意，改按倪师的看法——全盘杀星最集中的那一宫，按它的地支对应脏腑；不再按星的五行推脏器
-- 网站知识库「古籍引证」由 244 处增至 405 处，每一处都能在《紫微斗数全书》原文里逐字找到
+- Câu nào ghi là lời thầy Nghê hay «Toàn Thư» mà tra không ra nguồn thì xoá hoặc thay bằng lời gốc tra được từng chữ; lời thầy Nghê ghi rõ «Thiên Kỷ» tập mấy, phút giây nào
+- Xoá các câu về Tứ Hóa không thể xảy ra (như Thất Sát hóa Quyền, Tử Vi hóa Kỵ); câu luận chỉ đúng trong điều kiện nào đó thì bổ sung điều kiện
+- Câu kiểu «lúc mạnh thì… lúc hãm thì…» nói cả hai đầu thì sửa thành chỉ hiển thị trường hợp đúng với lá số đó
+- Sức khỏe: tạng phủ nào cần lưu ý thì đổi theo cách nhìn của thầy Nghê — xem toàn lá, sao sát tụ nhiều nhất ở cung nào thì lấy địa chi của cung đó ứng với tạng phủ; không suy tạng theo ngũ hành của sao nữa
+- Mục «Cổ thư dẫn chứng» trong kho tri thức của website tăng từ 244 lên 405 chỗ, chỗ nào cũng tra được từng chữ trong nguyên văn «Tử Vi Đẩu Số Toàn Thư»
 
-**3. 排盘引擎同步**（[PR #39](https://github.com/Renhuai123/ziwei-doushu/pull/39)）—— `dst-cn.ts` 新增 `chinaDSTSpan(year)`，查某年中国夏令时起止；`cities.ts` 补全省直辖县级单位与新疆兵团各市的经度（神农架、海南各市县、阿拉尔等），出生地选这些城市时真太阳时校正可用。
+**3. Engine lập lá số đồng bộ** ([PR #39](https://github.com/Renhuai123/ziwei-doushu/pull/39)) —— `dst-cn.ts` thêm `chinaDSTSpan(year)` để tra khoảng thời gian giờ mùa hè của Trung Quốc theo năm; `cities.ts` bổ sung kinh độ của các đơn vị cấp huyện trực thuộc tỉnh và các thành phố thuộc Binh đoàn Tân Cương (Thần Nông Giá, các thành phố/huyện Hải Nam, A Lạp Nhĩ…), chọn các thành phố này làm nơi sinh thì hiệu chỉnh giờ mặt trời thật vẫn dùng được.
 
-**4. 许可** —— [`DATASET-LICENSE`](./DATASET-LICENSE) 适用范围加上 v4.0；写明解读里引用的倪师原话不在数据授权范围内，与第五章倪师原话的 CC BY-NC-SA 4.0 一致。v3.0 样本数据集及其条款不变。
+**4. Giấy phép** —— [`DATASET-LICENSE`](./DATASET-LICENSE) mở rộng phạm vi áp dụng sang v4.0; ghi rõ lời thầy Nghê trích trong phần luận giải không nằm trong phạm vi cấp phép dữ liệu, nhất quán với CC BY-NC-SA 4.0 của chương V về lời thầy Nghê. Bộ dữ liệu mẫu v3.0 và điều khoản của nó không đổi.
 
-> **2026-11-08 补充**：新开公开仓 **[nishi-ziwei-video-reading](https://github.com/Renhuai123/nishi-ziwei-video-reading)**——用多家大模型把倪师《天纪》紫微 17 集共 160 万帧逐帧精读一遍，方案、脚本、考试成绩和踩过的坑全过程公开，边做边更新，近期动态看那里。
+> **Bổ sung 08/11/2026**: Mở kho công khai mới **[nishi-ziwei-video-reading](https://github.com/Renhuai123/nishi-ziwei-video-reading)** — dùng nhiều mô hình lớn đọc kỹ từng khung hình 17 tập «Thiên Kỷ» phần Tử Vi của thầy Nghê, tổng cộng 1,6 triệu khung hình; phương án, script, điểm kiểm tra và các lỗi đã vấp đều công khai toàn bộ quá trình, vừa làm vừa cập nhật, động thái gần đây xem ở đó.
 
-> **2026-11-02 补充**：晚子时换日改按**真太阳时**判断，与时辰支同一口径（#63）——填了出生地时，东经 100° 钟表 23:30（真太阳时 22:10，亥时）留在本日，不再排成「次日亥时」；不填出生地不做校正，结果不变，线上 ouranic.cn 也是这个口径。闰月归属参数写错时当场报错，不再静默按「归本月」排盘（#71）。感谢 Bortlesboat、xunguangzlj-cloud 提交，Verchiel666 复核。
+> **Bổ sung 02/11/2026**: Đổi ngày cuối giờ Tý muộn sang tính theo **giờ mặt trời thật**, cùng khẩu kính với chi giờ (#63) — đã nhập nơi sinh thì 23:30 giờ đồng hồ tại kinh đông 100° (giờ mặt trời thật 22:10, giờ Hợi) ở lại ngày hôm đó, không còn xếp thành «giờ Hợi ngày hôm sau» nữa; không nhập nơi sinh thì không hiệu chỉnh, kết quả giữ nguyên, trên ouranic.cn cũng cùng khẩu kính này. Tham số tháng nhuận ghi sai thì báo lỗi ngay tại chỗ, không lặng lẽ xếp «về tháng này» như trước (#71). Cảm ơn Bortlesboat, xunguangzlj-cloud đã đóng góp, Verchiel666 đã soát lại.
 
-> **2026-10-31 补充**：线上平台更名 **OURANIC**，网址由 metisziwei.com 迁到 **[ouranic.cn](https://ouranic.cn/?from=gh-readme)**（运营主体北京王多鱼科技有限责任公司，京ICP备2026069066号-1）；旧网址会自动跳转，本仓库的代码、数据集与许可都不变。
+> **Bổ sung 31/10/2026**: Nền tảng trực tuyến đổi tên thành **OURANIC**, địa chỉ chuyển từ metisziwei.com sang **[ouranic.cn](https://ouranic.cn/?from=gh-readme)** (đơn vị vận hành: Công ty TNHH Công nghệ Bắc Kinh Vương Đa Ngư, số ICP Kinh 2026069066-1); địa chỉ cũ sẽ tự chuyển hướng, code, dữ liệu và giấy phép của kho này không đổi.
 
-> **2026-10-27 补充**：排盘引擎同步——`true-solar-time.ts` 支持海外出生地：传 `utcOffsetMinutes`（出生地时区的固定标准偏移），按当地时区中央经线做经度修正，国内不传时结果逐位不变；新增 `clock-adjust.ts`，把夏令时、或当年时区与现在不同时的**钟表读数换成标准时间**（跨日不改，交给用户），建议做成用户亲手点、可撤销的按钮，不要自动改。顺带更正：中国夏令时引擎**只判定、从不自动扣除**，此前「引擎能力」表写成「自动扣除」，有误。
+> **Bổ sung 27/10/2026**: Engine lập lá số đồng bộ — `true-solar-time.ts` hỗ trợ nơi sinh ở nước ngoài: truyền `utcOffsetMinutes` (độ lệch chuẩn cố định theo múi giờ của nơi sinh), hiệu chỉnh kinh độ theo kinh tuyến trung tâm của múi giờ địa phương; trong nước không truyền thì kết quả từng bit không đổi; thêm `clock-adjust.ts` để đổi số đọc đồng hồ thành giờ chuẩn khi có giờ mùa hè hoặc múi giờ năm đó khác bây giờ (qua ngày thì không đổi, giao cho người dùng tự xử). Nhân tiện sửa: engine giờ mùa hè Trung Quốc **chỉ phán đoán, không bao giờ tự trừ**, trước đây bảng «Khả năng của engine» ghi «tự trừ» là sai.
 
-> **2026-10-24 补充**：项目理念移到页首——标题下居中一句「算法是公开的传统智慧，不应该被锁在围墙里」，紧接两段理念原文（前标「项目理念」），原有介绍段前标「项目信息」；第十章「项目理念」改为指向页首。
+> **Bổ sung 24/10/2026**: Ý tưởng dự án dời lên đầu trang — dưới tiêu đề đặt giữa một câu «Thuật toán là trí tuệ truyền thống công khai, không nên bị nhốt trong tường rào», tiếp theo là hai đoạn ý tưởng gốc (đánh dấu «Ý tưởng dự án» trước), đoạn giới thiệu cũ đánh dấu «Thông tin dự án» ở trước; chương X «Ý tưởng dự án» đổi thành trỏ lên đầu trang.
 
-> **2026-10-20 补充**：星曜亮度默认改为《斗数全书》，与主流排盘软件默认一致，此前默认的「现代修正 v2」仍可在流派设置里选；补齐天姚、天刑、天喜、大耗、解神、截空、副截、旬空的亮度，月德不再标亮度。用 5 张金标准盘逐宫核对，星曜落宫与亮度全部吻合。注意：v4.0 数据集（10-15）是按旧默认「现代修正 v2」生成的，其中亮度字和少量随亮度变化的解读句会与新默认不同。
+> **Bổ sung 20/10/2026**: Độ sáng sao mặc định đổi sang «Đẩu Số Toàn Thư», giống mặc định của phần mềm lập lá số chính thống; «Hiệu chỉnh hiện đại v2» trước đây vẫn chọn được trong cài đặt trường phái; bổ sung độ sáng cho Thiên Diêu, Thiên Hình, Thiên Hỉ, Đại Hao, Giải Thần, Tiệt Không, Phụ Tiệt, Tuần Không; Nguyệt Đức không ghi độ sáng nữa. Dùng 5 lá chuẩn vàng đối chiếu từng cung, sao nhập cung và độ sáng đều khớp hoàn toàn. Lưu ý: bộ dữ liệu v4.0 (15/10) được tạo theo mặc định cũ «Hiệu chỉnh hiện đại v2», nên chữ độ sáng và một ít câu luận đổi theo độ sáng sẽ khác mặc định mới.
 
-> **2026-10-06 ~ 10-07 补充**：README 加「注：关于六亲判断」（倪师原话 + 出处链接，中英两份）；网站链接加渠道码 `?from=`；同步倪师原话语料勘误（主星南斗、北斗归属）。
+> **Bổ sung 06–07/10/2026**: README thêm «Lưu ý: về luận đoán lục thân» (lời thầy Nghê + đường dẫn nguồn, cả bản Trung và bản Anh); link website thêm mã kênh `?from=`; đồng bộ hiệu đính ngữ liệu lời thầy Nghê (chủ tinh Nam Đẩu, Bắc Đẩu thuộc về đâu).
 
-### 上一轮更新（2026-09-21）
+### Đợt cập nhật trước (21/09/2026)
 
+> **Bổ sung 03/10/2026**: Lời gốc «Thiên Kỷ · Tử Vi Đẩu Số» của thầy Nghê (1.848 câu) tách thành chương riêng (chương V); hợp nhất đóng góp ngoài #29 (kiểm tra số thứ tự giờ); engine từ chối ngày dương lịch không tồn tại, bộ dữ liệu bổ sung khẩu kính trường và vấn đề đã biết; nộp package-lock.json; địa chỉ site đổi thành cấu hình được; demo hợp bàn đổi sang dùng engine nội bộ để lập lá số, khi thiếu API AI thì báo rõ; bổ sung hướng dẫn đóng góp, quy tắc ứng xử, mẫu issue và PR; thêm giới thiệu tiếng Anh [README.en.md](./README.en.md); bỏ hai gói triển khai không dùng đến (vercel CLI, @cloudflare/next-on-pages), số dependency giảm từ 483 xuống 185; sau đó nâng lên Next.js 16 để vá lỗ hổng postcss, cảnh báo bảo mật của GitHub từ 51 cảnh báo về 0.
 
-> **2026-10-03 补充**：倪师《天纪·紫微斗数》原话 1848 条单独成章（第五章）；合并外部贡献 #29（时辰序号校验）；引擎拒绝不存在的公历日期，数据集补字段口径与已知问题；提交 package-lock.json；站点地址改为可配置；合盘演示改用本地引擎起盘、AI 接口缺失时明确提示；补齐贡献指南、行为准则、问题与 PR 模板；新增英文简介 [README.en.md](./README.en.md)；去掉两个用不上的部署工具包（vercel CLI、@cloudflare/next-on-pages），依赖从 483 个减到 185 个；随后升级到 Next.js 16 修掉 postcss 漏洞，GitHub 安全提醒从 51 条清零。
+![Tổng quan đợt cập nhật](./docs/update-20260921.png)
 
-![本轮更新总览](./docs/update-20260921.png)
+Sau ba tháng, kho này hoàn thành một đợt cập nhật đầy đủ ([PR #28](https://github.com/Renhuai123/ziwei-doushu/pull/28), 26 file, +2736 / −108 dòng):
 
-时隔三个月，本仓库完成一次完整更新（[PR #28](https://github.com/Renhuai123/ziwei-doushu/pull/28)，26 个文件、+2736 / −108 行）：
+**1. Engine lập lá số đồng bộ với khẩu kính trên mạng** —— `algorithm.ts` từ 181 dòng lên 641 dòng, ngoài ra cập nhật sihua / types / constants / patterns / cities / famous; thêm 8 module mới (1.367 dòng):
 
-**1. 排盘引擎同步到线上口径** —— `algorithm.ts` 从 181 行到 641 行，另更新 sihua / types / constants / patterns / cities / famous；新增 8 个模块（1367 行）：
-
-| 模块 | 作用 |
+| Module | Tác dụng |
 |------|------|
-| `true-solar-time.ts` | 真太阳时校正（经度差 + 均时差） |
-| `dst-cn.ts` | 中国 1986–1991 夏令时 |
-| `clock-adjust.ts` | 钟表读数换成标准时间（夏令时 / 当年时区不同） |
-| `lunar-solar.ts` | 农历 / 公历互转与闰月边界 clamp |
-| `school-data.ts` / `school-tables.generated.ts` / `school-config.ts` | 星曜亮度流派数据与对照表、闰月与晚子时口径配置 |
-| `shier-shen.ts` | 十二神煞 |
-| `yunxian-context.ts` | 运限上下文（含童限） |
+| `true-solar-time.ts` | Hiệu chỉnh giờ mặt trời thật (chênh kinh độ + phương trình thời gian) |
+| `dst-cn.ts` | Giờ mùa hè Trung Quốc 1986–1991 |
+| `clock-adjust.ts` | Đổi số đọc đồng hồ thành giờ chuẩn (giờ mùa hè / múi giờ năm đó khác bây giờ) |
+| `lunar-solar.ts` | Đổi âm lịch / dương lịch và kẹp biên tháng nhuận |
+| `school-data.ts` / `school-tables.generated.ts` / `school-config.ts` | Dữ liệu độ sáng sao theo trường phái, bảng đối chiếu, cấu hình khẩu kính tháng nhuận và giờ Tý muộn |
+| `shier-shen.ts` | Thập nhị thần sát |
+| `yunxian-context.ts` | Ngữ cảnh vận hạn (kể cả xử lý hạn trẻ em) |
 
-**2. 补上回归测试与 CI** —— 此前本仓库没有任何测试。现在 5 条排盘回归，`npm test` 一条命令跑完，每次 push 与 PR 在 GitHub Actions 上自动跑。
+**2. Bổ sung kiểm thử hồi quy và CI** —— Trước đây kho này không có test nào. Giờ có 5 test hồi quy lập lá số, `npm test` chạy một lệnh là xong, mỗi lần push và PR đều chạy tự động trên GitHub Actions.
 
-**3. 修掉样本时辰注释错位**（[#26](https://github.com/Renhuai123/ziwei-doushu/issues/26)）—— `famous.ts` 里 11 条名人样本有 7 条的时辰注释与 `hour` 索引不符（`hour` 一直是**时辰地支索引 0–11**，不是 0–23 的小时数）。已改正并加回归钉住。
+**3. Sửa lỗi chú thích giờ trong mẫu bị lệch** ([#26](https://github.com/Renhuai123/ziwei-doushu/issues/26)) —— Trong `famous.ts`, 11 mẫu người nổi tiếng có 7 mẫu mà chú thích giờ không khớp với chỉ số `hour` (`hour` từ trước đến nay vẫn là **chỉ số địa chi của giờ 0–11**, không phải giờ đồng hồ 0–23). Đã sửa và thêm test hồi quy để ghim lại.
 
-**4. 积压 issue 从 18 条清到 4 条**，留下的都是还在走的。
+**4. Issue tồn đọng từ 18 issue dọn về 4 issue**, còn lại đều là việc đang đi tiếp.
 
-**5. 文档与许可** —— 新增 [`DATASET-LICENSE`](./DATASET-LICENSE)；README 补齐引擎能力清单、维护节奏、开源边界；修正两处不实描述（数据集「口径与线上完全一致」、界面「完整的 Next.js 15 前端」）。
+**5. Tài liệu và giấy phép** —— Thêm [`DATASET-LICENSE`](./DATASET-LICENSE); README bổ sung danh sách khả năng của engine, nhịp bảo trì, ranh giới mã nguồn mở; sửa hai chỗ mô tả không đúng sự thật (bộ dữ liệu «khẩu kính hoàn toàn giống trên mạng», giao diện là «frontend Next.js 15 đầy đủ»).
 
 ---
 
-## 二·新、13 维解读数据集 v4.0（2026-10-15）
+## II·mới. Bộ dữ liệu luận giải 13 chiều v4.0 (15/10/2026)
 
-> **下载位置：本仓库右侧 [Releases → v4.0-13d](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v4.0-13d)**
+> **Vị trí tải: bên phải kho này, [Releases → v4.0-13d](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v4.0-13d)**
 
-v4.0 用 2026-10-15 版网站断语库重新生成：13 个分析维度的断语已按倪海厦《天纪》逐字稿与《紫微斗数全书》原文逐句校正——查不到出处的引文删去或换成逐字可查的原话（倪师原话注明《天纪》集数与时间码），不会发生的四化相关句子删去，有条件的断语写明条件。
+v4.0 được tạo lại bằng kho câu luận của website bản 15/10/2026: câu luận của 13 chiều phân tích đã hiệu đính từng câu theo bản ghi lời thầy Nghê Hải Hạ trong «Thiên Kỷ» và nguyên văn «Tử Vi Đẩu Số Toàn Thư» — trích dẫn nào tra không ra nguồn thì xoá hoặc thay bằng lời gốc tra được từng chữ (lời thầy Nghê ghi rõ tập «Thiên Kỷ» và mã thời gian), câu về Tứ Hóa không thể xảy ra thì xoá, câu luận có điều kiện thì ghi rõ điều kiện.
 
-### 规格
+### Quy cách
 
-| 项目 | 说明 |
+| Hạng mục | Giải thích |
 |------|------|
-| 命盘数 | **674,976 张**（公历 1950–2026 年 × 真实每月天数 × 12 时辰 × 男女） |
-| 解读段数 | **8,774,688 段**（每张盘 13 维） |
-| 维度 | 命格总览、性格、感情、事业、财运、健康、兄弟、子女、迁移、人际、田宅、福德、父母 |
-| 大小 | 解压后 56.6 GB；压缩后 161 MB（77 个年份文件，zstd；另有一个全年份总包 `ziwei-interp-v4-all.tar`） |
-| 正文 | 约 204 亿字，每张盘约 3.0 万字 |
-| 生成方式 | 排盘引擎 + 断语库确定性生成，不经 AI，同一输入恒得同一输出 |
-| 内容版本 | `ca268829f7a9`（与网站同期的 ANALYSIS_CONTENT_VERSION） |
+| Số lá | **674.976 lá** (dương lịch 1950–2026 × số ngày thật mỗi tháng × 12 giờ × nam/nữ) |
+| Số đoạn luận giải | **8.774.688 đoạn** (mỗi lá 13 chiều) |
+| Các chiều | Tổng quan mệnh cách, tính cách, tình cảm, sự nghiệp, tài vận, sức khỏe, anh em, con cái, di chuyển, giao thiệp, điền trạch, phúc đức, cha mẹ |
+| Kích thước | Sau giải nén 56,6 GB; sau nén 161 MB (77 file theo năm, zstd; ngoài ra có gói tổng toàn bộ các năm `ziwei-interp-v4-all.tar`) |
+| Chính văn | Khoảng 20,4 tỉ chữ, mỗi lá khoảng 30.000 chữ |
+| Cách tạo | Engine lập lá số + kho câu luận tạo ra một cách xác định, không qua AI, cùng một đầu vào luôn cho cùng một đầu ra |
+| Phiên bản nội dung | `ca268829f7a9` (cùng ANALYSIS_CONTENT_VERSION với website thời điểm đó) |
 
-**每行一张盘**（JSON Lines），字段：
+**Mỗi dòng một lá** (JSON Lines), các trường:
 
-| 字段 | 含义 |
+| Trường | Ý nghĩa |
 |------|------|
-| `k` | 键：`YYYY-MM-DD-时辰序号-性别`，如 `1990-01-01-0-male` |
-| `y` / `m` / `d` | **公历**出生日期；只含真实存在的日期（不再有 2 月 30 日之类） |
-| `h` | **时辰序号 0–11**（子 = 0 …… 亥 = 11），不是钟点；对照表见上一节 |
+| `k` | Khoá: `YYYY-MM-DD-số thứ tự giờ-giới tính`, ví dụ `1990-01-01-0-male` |
+| `y` / `m` / `d` | Ngày sinh **dương lịch**; chỉ chứa ngày thật (không còn kiểu 30 tháng 2 nữa) |
+| `h` | **Số thứ tự giờ 0–11** (Tý = 0 …… Hợi = 11), không phải giờ đồng hồ; bảng đối chiếu xem mục trước |
 | `g` | `male` / `female` |
-| `ms` | 命宫第一颗主星；命宫无主星时为 `null` |
-| `t` | 各维字数 |
-| `c` | 13 维解读全文（Markdown），键为 `overview` / `personality` / `love` / `career` / `wealth` / `health` / `family` / `children` / `move` / `friends` / `home` / `spirit` / `parents` |
+| `ms` | Sao chính đầu tiên của cung Mệnh; cung Mệnh không có sao chính thì là `null` |
+| `t` | Số chữ từng chiều |
+| `c` | Toàn văn luận giải 13 chiều (Markdown), khoá là `overview` / `personality` / `love` / `career` / `wealth` / `health` / `family` / `children` / `move` / `friends` / `home` / `spirit` / `parents` |
 
-**口径说明**
-- 是本命盘视图的解读；网站上按读者当前年龄改写的句子、各维末尾附加的倪师法则段、AI 解读都不在数据集里。
-- 按时辰序号直接排盘，未按出生地做真太阳时校正。
+**Lưu ý về khẩu kính**
+- Đây là luận giải ở góc nhìn lá số gốc; những câu trên website viết lại theo tuổi hiện tại của người đọc, đoạn quy tắc của thầy Nghê gắn thêm ở cuối mỗi chiều, và phần AI luận giải đều không nằm trong bộ dữ liệu.
+- Lập lá số trực tiếp theo số thứ tự giờ, chưa hiệu chỉnh giờ mặt trời thật theo nơi sinh.
 
-### 下载与解压
+### Tải về và giải nén
 
 ```bash
-# 一次下全部：gh release download v4.0-13d --repo Renhuai123/ziwei-doushu -p "ziwei-interp-v4-all.tar"
-# 只要某几年就只下那几年，例如 1990 年
-zstd -d --long=27 year-1990.jsonl.zst          # 得到 year-1990.jsonl
-shasum -a 256 -c SHA256SUMS.txt --ignore-missing # 校验
+# Tải hết một lần: gh release download v4.0-13d --repo Renhuai123/ziwei-doushu -p "ziwei-interp-v4-all.tar"
+# Chỉ cần vài năm thì chỉ tải các năm đó, ví dụ năm 1990
+zstd -d --long=27 year-1990.jsonl.zst          # được year-1990.jsonl
+shasum -a 256 -c SHA256SUMS.txt --ignore-missing # kiểm tra
 ```
 
-`--long=27` 必须带上（压缩时用了长窗口）。Windows 可用 [zstd 官方发布包](https://github.com/facebook/zstd/releases) 里的 zstd.exe，参数相同。
+`--long=27` bắt buộc phải có (lúc nén đã dùng cửa sổ dài). Trên Windows có thể dùng zstd.exe trong [gói phát hành chính thức của zstd](https://github.com/facebook/zstd/releases), tham số như nhau.
 
-### 引文说明
+### Lưu ý về trích dẫn
 
-解读里引用的倪海厦《天纪》原话**不属于本数据集的授权范围**：它们是为说明断语出处而注明集数与时间码的简短引用，著作权归原权利人；要把这些原话单独成批使用，按第五章倪师原话的 [CC BY-NC-SA 4.0](./docs/tianji-ziwei/LICENSE.md) 处理。《紫微斗数全书》原文属公有领域。
+Lời gốc «Thiên Kỷ» của Nghê Hải Hạ được trích trong phần luận giải **không thuộc phạm vi cấp phép của bộ dữ liệu này**: đó là những trích dẫn ngắn, ghi rõ tập và mã thời gian để ghi rõ câu luận lấy từ đâu, bản quyền thuộc về chủ sở hữu gốc; muốn dùng riêng hàng loạt các lời gốc đó thì xử lý theo [CC BY-NC-SA 4.0](./docs/tianji-ziwei/LICENSE.md) ở chương V về lời thầy Nghê. Nguyên văn «Tử Vi Đẩu Số Toàn Thư» thuộc phạm vi công cộng.
 
-### 许可
+### Giấy phép
 
-与 v3.0 相同：**CC BY 4.0，可自由商用，唯一要求是保留来源标注**（上面「引文说明」里的倪师原话除外），完整条款见 [DATASET-LICENSE](./DATASET-LICENSE)。引用时请写：
+Giống v3.0: **CC BY 4.0, dùng thương mại tự do, yêu cầu duy nhất là giữ lại ghi nguồn** (trừ lời thầy Nghê trong mục «Lưu ý về trích dẫn» ở trên), điều khoản đầy đủ xem [DATASET-LICENSE](./DATASET-LICENSE). Khi trích dẫn xin ghi:
 
-> 本项目使用了 **紫微斗数开源解读数据集 v4.0**（674,976 张命盘 × 13 维）
-> 来源：https://github.com/Renhuai123/ziwei-doushu
-> 作者：王多鱼AI
+> Dự án này đã dùng **Bộ dữ liệu luận giải Tử Vi Đẩu Số mã nguồn mở v4.0** (674.976 lá số × 13 chiều)
+> Nguồn: https://github.com/Renhuai123/ziwei-doushu
+> Tác giả: 王多鱼AI
 
 ---
 
-## 二、51.8 万命盘样本数据集
+## II. Bộ dữ liệu mẫu 518 nghìn lá số
 
-> **下载位置：本仓库右侧 [Releases](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v3.0-samples) 页面**
+> **Vị trí tải: bên phải kho này, trang [Releases](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v3.0-samples)**
 
-我们开源了一套完整的紫微斗数命盘样本数据集，覆盖 **51.8 万种排盘组合**（年 60 × 月 12 × 日 30 × 时 12 × 性别 2），每条样本包含完整的命盘结构和基于倪海厦体系的解读文本。
+Chúng tôi mở mã nguồn một bộ dữ liệu mẫu lá số Tử Vi Đẩu Số hoàn chỉnh, bao phủ **518 nghìn tổ hợp lập lá số** (năm 60 × tháng 12 × ngày 30 × giờ 12 × giới tính 2), mỗi mẫu gồm cấu trúc lá số đầy đủ và văn bản luận giải theo hệ Nghê Hải Hạ.
 
-### 2.1 数据规格
+### 2.1 Quy cách dữ liệu
 
-| 项目 | 说明 |
+| Hạng mục | Giải thích |
 |------|------|
-| 样本数量 | **518,400 条** |
-| 总大小 | 压缩后 5.5 GB（分 3 卷），解压后 33.1 GB |
-| 体系 | 倪海厦《天纪》正统（纯飞星派已下线） |
-| 内容 | 命盘 JSON + 13 主题解读文本（命格总览、财运、事业、感情、健康等） |
-| 验证 | 男女命差异化 100%、健康含子午流注 100%、女命含妇科保养 100% |
-| 口径 | 由 **v3 版排盘引擎 + 当期断语库**生成；线上引擎在持续更新，新版输出与本数据集可能有差异 |
+| Số mẫu | **518.400 mẫu** |
+| Tổng kích thước | Sau nén 5,5 GB (chia 3 phần), sau giải nén 33,1 GB |
+| Hệ phái | Tử Vi Đẩu Số chính tông «Thiên Kỷ» của Nghê Hải Hạ (phái Phi Tinh thuần tuý đã gỡ xuống) |
+| Nội dung | JSON lá số + văn bản luận giải 13 chủ đề (tổng quan mệnh cách, tài vận, sự nghiệp, tình cảm, sức khỏe…) |
+| Kiểm chứng | Khác biệt nam/nữ mệnh 100%, sức khỏe có Tý Ngọ lưu chú 100%, mệnh nữ có dưỡng sinh phụ khoa 100% |
+| Khẩu kính | Do **engine lập lá số v3 + kho câu luận thời điểm đó** tạo ra; engine trên mạng đang cập nhật liên tục, đầu ra bản mới có thể khác bộ dữ liệu này |
 
-**字段口径**（每条样本由 `birthInfo` 生成，常被看错的是 `hour`）：
+**Khẩu kính trường dữ liệu** (mỗi mẫu được tạo từ `birthInfo`, hay bị đọc nhầm nhất là `hour`):
 
-| 字段 | 含义 |
+| Trường | Ý nghĩa |
 |------|------|
-| `birthInfo.year` / `month` / `day` | **公历**出生日期：1924–1983 年（一个完整甲子），每月取 1–30 日 |
-| `birthInfo.hour` | **时辰序号 0–11**，不是 0–23 点钟：子 = 0、丑 = 1 …… 亥 = 11 |
+| `birthInfo.year` / `month` / `day` | Ngày sinh **dương lịch**: năm 1924–1983 (một giáp Tý đầy đủ), mỗi tháng lấy ngày 1–30 |
+| `birthInfo.hour` | **Số thứ tự giờ 0–11**, không phải giờ đồng hồ 0–23: Tý = 0, Sửu = 1 …… Hợi = 11 |
 | `birthInfo.gender` | `male` / `female` |
-| `birthInfo.longitude` | 固定 120（东经 120°，未做各地真太阳时校正） |
-| 文件名 `YYYY-MM-DD-hHH-性别.json` | 其中 `hHH` 同样是时辰序号，例如 `h11` 是亥时，不是上午 11 点 |
+| `birthInfo.longitude` | Cố định 120 (kinh đông 120°, chưa hiệu chỉnh giờ mặt trời thật theo từng nơi) |
+| Tên file `YYYY-MM-DD-hHH-giới tính.json` | Trong đó `hHH` cũng là số thứ tự giờ, ví dụ `h11` là giờ Hợi, không phải 11 giờ sáng |
 
-时辰序号与钟点对照：
+Bảng đối chiếu số thứ tự giờ và giờ đồng hồ:
 
-| 序号 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+| Số thứ tự | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 时辰 | 子 | 丑 | 寅 | 卯 | 辰 | 巳 | 午 | 未 | 申 | 酉 | 戌 | 亥 |
-| 钟点 | 23–1 | 1–3 | 3–5 | 5–7 | 7–9 | 9–11 | 11–13 | 13–15 | 15–17 | 17–19 | 19–21 | 21–23 |
+| Giờ | Tý | Sửu | Dần | Mão | Thìn | Tỵ | Ngọ | Mùi | Thân | Dậu | Tuất | Hợi |
+| Giờ đồng hồ | 23–1 | 1–3 | 3–5 | 5–7 | 7–9 | 9–11 | 11–13 | 13–15 | 15–17 | 17–19 | 19–21 | 21–23 |
 
-23:00–23:59 出生（晚子时）按次日排盘、时辰取 0；00:00–00:59 出生（早子时）按当日排盘、时辰同样取 0。
+Sinh 23:00–23:59 (giờ Tý muộn) thì lập lá số theo ngày hôm sau, giờ lấy số 0; sinh 00:00–00:59 (giờ Tý sớm) thì lập theo ngày hôm đó, giờ cũng lấy số 0.
 
-**已知问题：约 2,520 条样本的日期并不存在。** 生成时每个月都取了 1–30 日，所以 2 月 30 日，以及非闰年的 2 月 29 日也生成了样本，共 105 个日期 × 12 时辰 × 2 性别 = 2,520 条，占 0.49%。v3 引擎遇到这类日期不报错，而是顺延成 3 月 1–2 日排盘，所以这些样本的内容与对应的 3 月 1–2 日样本重复。使用时请过滤掉：`month = 2` 且 `day = 30`，或 `month = 2` 且 `day = 29` 且该年不是闰年。引擎从 2026-10-03 起会直接拒绝不存在的日期，下一版数据集不会再有这类样本。
+**Vấn đề đã biết: khoảng 2.520 mẫu có ngày không tồn tại.** Lúc tạo, tháng nào cũng lấy ngày 1–30 nên cả 30 tháng 2 và 29 tháng 2 của năm không nhuận cũng được tạo mẫu, tổng cộng 105 ngày × 12 giờ × 2 giới tính = 2.520 mẫu, chiếm 0,49%. Engine v3 gặp các ngày này không báo lỗi mà dời sang ngày 1–2 tháng 3 để lập lá số, nên nội dung các mẫu này trùng với mẫu ngày 1–2 tháng 3 tương ứng. Khi dùng xin lọc bỏ: `month = 2` và `day = 30`, hoặc `month = 2` và `day = 29` mà năm đó không phải năm nhuận. Engine từ 03/10/2026 sẽ từ chối thẳng ngày không tồn tại, bộ dữ liệu bản sau sẽ không còn các mẫu này nữa.
 
-### 2.2 下载方式
+### 2.2 Cách tải
 
-前往 [Releases](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v3.0-samples) 下载以下文件：
+Vào [Releases](https://github.com/Renhuai123/ziwei-doushu/releases/tag/v3.0-samples) để tải các file sau:
 
 ```
-ziwei-samples-v3-part1.zip.001  (1.9 GB)
-ziwei-samples-v3-part2.zip.002  (1.9 GB)
-ziwei-samples-v3-part3.zip.003  (1.8 GB)
-SHA256SUMS.txt                  (校验文件)
+ziwei-samples-v3-part1.zip.001  (1,9 GB)
+ziwei-samples-v3-part2.zip.002  (1,9 GB)
+ziwei-samples-v3-part3.zip.003  (1,8 GB)
+SHA256SUMS.txt                  (file kiểm tra)
 ```
 
-下载后合并解压：
+Tải về rồi gộp và giải nén:
 
 ```bash
 # macOS / Linux
@@ -237,203 +248,212 @@ Get-Content ziwei-samples-v3-part*.zip.* -Encoding Byte -ReadCount 0 | Set-Conte
 Expand-Archive combined.zip
 ```
 
-### 2.3 用途
+### 2.3 Công dụng
 
-- 微调小模型的训练语料（51.8 万 input-output 配对）
-- AI 对话的 RAG 检索源
-- 修改 `patterns.ts` 后做 A/B 基线对比
-- 紫微斗数研究与数据分析
+- Ngữ liệu huấn luyện để fine-tune mô hình nhỏ (518 nghìn cặp input-output)
+- Nguồn truy xuất RAG cho hội thoại AI
+- Đối chiếu baseline A/B sau khi sửa `patterns.ts`
+- Nghiên cứu Tử Vi Đẩu Số và phân tích dữ liệu
 
-### 2.4 数据许可与引用
+### 2.4 Giấy phép dữ liệu và trích dẫn
 
-📂 **完全开源 · 可自由商用** —— 你可以在任何项目里使用这套数据，包括但不限于：
+📂 **Hoàn toàn mã nguồn mở · Dùng thương mại tự do** —— Bạn có thể dùng bộ dữ liệu này trong bất kỳ dự án nào, bao gồm nhưng không giới hạn:
 
-- 商业产品 / SaaS / 付费应用
-- AI 模型微调（开源或闭源模型均可）
-- 二次开发、再分发、衍生数据集
-- 学术研究、技术博客、教学课程
+- Sản phẩm thương mại / SaaS / ứng dụng trả phí
+- Fine-tune mô hình AI (mô hình mở hay đóng đều được)
+- Phát triển tiếp, tái phân phối, tạo bộ dữ liệu phái sinh
+- Nghiên cứu học thuật, blog kỹ thuật, khoá học giảng dạy
 
-无需付费、无需申请、无需事先告知。
+Không cần trả phí, không cần đăng ký, không cần báo trước.
 
-**唯一的要求是保留数据来源标注（attribution）**：
+**Yêu cầu duy nhất là giữ lại ghi nguồn dữ liệu (attribution)**:
 
-> 本项目使用了 **紫微斗数开源样本数据集 v3.0**（518,400 条）
-> 来源：https://github.com/Renhuai123/ziwei-doushu
-> 作者：王多鱼AI
+> Dự án này đã dùng **Bộ dữ liệu mẫu Tử Vi Đẩu Số mã nguồn mở v3.0** (518.400 mẫu)
+> Nguồn: https://github.com/Renhuai123/ziwei-doushu
+> Tác giả: 王多鱼AI
 
-放在哪里都行：
+Đặt ở đâu cũng được:
 
-- **网页 / 产品**：About 页 / 关于我们 / 数据来源 / 页脚，写一行链接即可
-- **AI 模型**：模型卡（Model Card）或数据集卡（Dataset Card）的 "Training Data" 字段
-- **学术论文**：参考文献或致谢章节
-- **二次发布的数据集**：README 或 metadata 文件里注明上游来源
+- **Trang web / sản phẩm**: trang About / Về chúng tôi / Nguồn dữ liệu / chân trang, ghi một dòng link là đủ
+- **Mô hình AI**: trường "Training Data" trong Model Card hoặc Dataset Card
+- **Bài báo học thuật**: phần tài liệu tham khảo hoặc lời cảm ơn
+- **Bộ dữ liệu phát hành lại**: ghi nguồn thượng nguồn trong README hoặc file metadata
 
-仅此一条，其余都自由。完整条款见 [DATASET-LICENSE](./DATASET-LICENSE)。希望这套数据能帮你做出好东西 —— 做出来记得来小红书 / 抖音 / 闲鱼 **@王多鱼AI** 打个招呼 👋
+Chỉ một yêu cầu đó, còn lại đều tự do. Điều khoản đầy đủ xem [DATASET-LICENSE](./DATASET-LICENSE). Mong bộ dữ liệu này giúp bạn làm ra thứ hay ho — làm xong nhớ lên Tiểu Hồng Thư / Douyin / Xianyu **@王多鱼AI** chào một tiếng 👋
 
 ---
 
-## 三、快速开始
+## III. Bắt đầu nhanh
 
 ```bash
-# 克隆
+# Clone
 git clone https://github.com/Renhuai123/ziwei-doushu.git
 cd ziwei-doushu
 
-# 安装依赖
+# Cài dependency
 npm install
 
-# 配置环境变量（只看排盘可以跳过；AI 配置仅在你自己实现了 /api/* 接口时才用得上）
+# Cấu hình biến môi trường (chỉ xem lập lá số thì bỏ qua; cấu hình AI chỉ dùng khi bạn tự triển khai các route /api/*)
 cp .env.example .env.local
 
-# 启动开发服务器
+# Chạy máy chủ phát triển
 npm run dev
 ```
 
-本地验证：
+Kiểm tra tại máy:
 
 ```bash
-npm run typecheck   # TypeScript 全量类型检查
-npm test            # 排盘引擎回归（768 盘 × 紫微铁律、夏令时、立春边界、红鸾天喜、样本时辰一致性、时辰序号边界、日期合法性、同宫双四化）
+npm run typecheck   # Kiểm tra kiểu TypeScript toàn bộ
+npm test            # Hồi quy engine lập lá số (768 lá × các luật sắt của Tử Vi, giờ mùa hè, biên Lập Xuân, Hồng Loan Thiên Hỉ, giờ mẫu nhất quán, biên số thứ tự giờ, ngày hợp lệ, cùng cung song Tứ Hóa)
 ```
 
-每次 push 与 PR 都会在 GitHub Actions 上跑同一套（见 [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)）。
+Mỗi lần push và PR đều chạy cùng bộ kiểm tra đó trên GitHub Actions (xem [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)).
 
-> **注意：开源版不含后端 API 路由。**排盘、命盘展示、合盘起盘都在浏览器里用本仓库的引擎完成，**不需要任何 API Key**。AI 解读（`/api/interpret`）和合盘 AI 分析（`/api/heming`）需要你自己实现接口；没实现之前，这两处会直接提示「开源版不含该接口」，配置 API Key 也不会变成可用（#30 就是这个原因）。
+> **Lưu ý: bản mã nguồn mở không có route API backend.** Lập lá số, hiển thị lá số, lập hợp bàn đều chạy trong trình duyệt bằng engine của kho này, **không cần bất kỳ API Key nào**. AI luận giải (`/api/interpret`) và phân tích hợp bàn bằng AI (`/api/heming`) cần bạn tự triển khai route; chưa triển khai thì hai chỗ đó sẽ báo thẳng «bản mã nguồn mở không có route này», có cấu hình API Key cũng không dùng được (issue #30 cũng vì lý do này).
 
 ---
 
-## 四、排盘引擎
+## IV. Engine lập lá số
 
-排盘内核全部在 `lib/ziwei/`。
+Lõi lập lá số nằm hết trong `lib/ziwei/`.
 
-### 4.1 能做到什么（与常见排盘库的差异）
+### 4.1 Làm được gì (khác các thư viện lập lá số thường gặp ở đâu)
 
-| 能力 | 说明 |
+| Khả năng | Giải thích |
 |------|------|
-| **真太阳时校正** | 按出生地经度算时差 + 均时差，避免东西向差一个时辰 |
-| **中国夏令时** | 1986–1991 年的夏令时区间自动判定（只判定、不自动扣除；钟表读数由用户确认后用 `clock-adjust.ts` 换成标准时间） |
-| **闰月四种口径** | 闰月归前月 / 归后月 / 按日切分 / 按本月，可配置，不写死一派 |
-| **晚子时换日** | 23:00–23:59 按次日排盘、00:00–00:59 按本日；填了出生地时按真太阳时判断（与时辰同一口径）；换日策略可切换 |
-| **星曜亮度 7 档** | 庙 / 旺 / 得 / 利 / 平 / 不 / 陷，另保留 3 档粗分类做显示降级 |
-| **亮度流派可切换** | 不同流派（含主流排盘软件的不同版本）对辅星亮度判法不一致，做成开关而非写死 |
-| **四化与飞星** | 生年四化、大限 / 流年四化、飞星自化 |
-| **十二神煞** | 本命层按生年支起，流年层改按流年支起 |
-| **格局判定** | 1100+ 行规则库（紫府同宫、日月并明、七杀朝斗等） |
+| **Hiệu chỉnh giờ mặt trời thật** | Tính chênh lệch theo kinh độ nơi sinh + phương trình thời gian, tránh lệch một giờ vì đông–tây |
+| **Giờ mùa hè Trung Quốc** | Tự phán đoán khoảng giờ mùa hè 1986–1991 (chỉ phán đoán, không tự trừ; số đọc đồng hồ do người dùng xác nhận rồi mới dùng `clock-adjust.ts` đổi thành giờ chuẩn) |
+| **Bốn khẩu kính tháng nhuận** | Tháng nhuận về tháng trước / về tháng sau / cắt theo ngày / theo tháng này, cấu hình được, không đóng cứng theo một phái |
+| **Giờ Tý muộn đổi ngày** | 23:00–23:59 lập theo ngày hôm sau, 00:00–00:59 lập theo ngày hôm đó; đã nhập nơi sinh thì phán đoán theo giờ mặt trời thật (cùng khẩu kính với chi giờ); chiến lược đổi ngày chuyển được |
+| **Độ sáng sao 7 bậc** | Miếu / Vượng / Đắc / Lợi / Bình / Bất / Hãm, ngoài ra giữ 3 bậc phân loại thô để hiển thị rút gọn |
+| **Độ sáng chuyển được theo trường phái** | Các trường phái (kể cả các bản khác nhau của phần mềm lập lá số chính thống) phán độ sáng sao phụ không giống nhau, nên làm thành công tắc chứ không viết chết |
+| **Tứ Hóa và phi tinh** | Tứ Hóa năm sinh, Tứ Hóa đại hạn / lưu niên, phi tinh tự hóa |
+| **Thập nhị thần sát** | Tầng bản mệnh khởi theo chi năm sinh, tầng lưu niên đổi sang khởi theo chi năm lưu niên |
+| **Nhận diện cách cục** | Kho quy tắc hơn 1.100 dòng (Tử Phủ đồng cung, Nhật Nguyệt tịnh minh, Thất Sát triều đẩu…) |
 
-### 4.2 文件怎么分
+### 4.2 File chia thế nào
 
-| 文件 | 说明 |
+| File | Giải thích |
 |------|------|
-| `algorithm.ts` | 完整排盘流程：安命宫、定五行局、安十四主星、安辅星、排大限流年 |
-| `constants.ts` | 天干地支、十四主星、辅星常量 |
-| `sihua.ts` | 四化飞星系统（禄权科忌），含各天干四化对照表 |
-| `patterns.ts` | **1100+ 行格局知识库**：紫府同宫、日月并明、七杀朝斗等经典格局判定规则 |
-| `heming-knowledge.ts` | 合盘方法论：倪师体系下双盘比对逻辑 |
-| `types.ts` | TypeScript 类型定义 |
-| `cities.ts` | 中国城市经纬度，用于真太阳时校正 |
-| `famous.ts` | 历史名人命盘示例数据 |
-| `school-data.ts` / `school-tables.generated.ts` / `school-config.ts` | 星曜亮度流派数据与对照表、闰月与晚子时口径配置 |
-| `shier-shen.ts` | 十二神煞（本命按生年支起、流年层按流年支起） |
-| `true-solar-time.ts` | 真太阳时校正（经度差 + 均时差） |
-| `dst-cn.ts` | 中国 1986–1991 夏令时年份与区间 |
-| `clock-adjust.ts` | 钟表读数按分钟平移成标准时间（跨日不改） |
-| `yunxian-context.ts` | 运限上下文（含童限处理） |
-| `lunar-solar.ts` | 农历 / 公历互转与闰月边界 clamp |
+| `algorithm.ts` | Quy trình lập lá số đầy đủ: an cung Mệnh, định ngũ hành cục, an 14 sao chính, an sao phụ, xếp đại hạn lưu niên |
+| `constants.ts` | Thiên can địa chi, 14 sao chính, hằng số sao phụ |
+| `sihua.ts` | Hệ Tứ Hóa phi tinh (Lộc Quyền Khoa Kỵ), kèm bảng đối chiếu Tứ Hóa theo từng thiên can |
+| `patterns.ts` | **Kho tri thức cách cục hơn 1.100 dòng**: quy tắc nhận diện các cách cục kinh điển như Tử Phủ đồng cung, Nhật Nguyệt tịnh minh, Thất Sát triều đẩu |
+| `heming-knowledge.ts` | Phương pháp luận hợp bàn: logic so sánh hai lá số theo hệ thầy Nghê |
+| `types.ts` | Định nghĩa kiểu TypeScript |
+| `cities.ts` | Kinh vĩ độ các thành phố Trung Quốc, dùng hiệu chỉnh giờ mặt trời thật |
+| `famous.ts` | Dữ liệu mẫu lá số người nổi tiếng trong lịch sử |
+| `school-data.ts` / `school-tables.generated.ts` / `school-config.ts` | Dữ liệu độ sáng sao theo trường phái, bảng đối chiếu, cấu hình khẩu kính tháng nhuận và giờ Tý muộn |
+| `shier-shen.ts` | Thập nhị thần sát (bản mệnh khởi theo chi năm sinh, tầng lưu niên khởi theo chi năm lưu niên) |
+| `true-solar-time.ts` | Hiệu chỉnh giờ mặt trời thật (chênh kinh độ + phương trình thời gian) |
+| `dst-cn.ts` | Năm và khoảng giờ mùa hè Trung Quốc 1986–1991 |
+| `clock-adjust.ts` | Đổi số đọc đồng hồ thành giờ chuẩn theo từng phút (qua ngày thì không đổi) |
+| `yunxian-context.ts` | Ngữ cảnh vận hạn (kể cả xử lý hạn trẻ em) |
+| `lunar-solar.ts` | Đổi âm lịch / dương lịch và kẹp biên tháng nhuận |
 
-### 4.3 古籍原文（`lib/classics/`）
+### 4.3 Cổ thư nguyên văn (`lib/classics/`)
 
-- **骨髓赋**（`gusuifu.ts`）— 紫微斗数核心歌诀
-- **紫微斗数全集**（`quanji.ts`）— 清代古本
-- **紫微斗数全书**（`quanshu.ts`）— 陈希夷传本
+- **Cốt Tủy Phú** (`gusuifu.ts`) — ca quyết cốt lõi của Tử Vi Đẩu Số
+- **Tử Vi Đẩu Số Toàn Tập** (`quanji.ts`) — bản cổ đời Thanh
+- **Tử Vi Đẩu Số Toàn Thư** (`quanshu.ts`) — bản truyền của Trần Hy Di
 
-### 4.4 SEO 知识图谱（`lib/seo/`）
+### 4.4 Sơ đồ tri thức SEO (`lib/seo/`)
 
-14 主星 × 12 宫位的结构化知识数据，可用于内容生成或知识库构建。
-
----
-
-## 五、倪师《天纪·紫微斗数》原话
-
-![倪海厦《天纪·紫微斗数》一图看全](./docs/tianji-ziwei/overview.png)
-
-倪海厦《天纪》紫微斗数部分的原话共 **1848 条**：正课 14 讲（第 2–15 讲上半）加 2 段补充，按讲分成 16 个文件，放在 [`docs/tianji-ziwei/`](./docs/tianji-ziwei/)。每条都带出处时间，点一下就跳回 B 站原视频的那一秒。
-
-- **怎么读**：先在上图里找到想看的主题，再点进对应那一讲，比如 [5上](./docs/tianji-ziwei/5%E4%B8%8A.md)（紫微在子）、[13上](./docs/tianji-ziwei/13%E4%B8%8A.md)（杀破狼、科权禄三会）。
-- **从哪来**：取自姊妹仓库 [nihai-tianji-corpus](https://github.com/Renhuai123/nihai-tianji-corpus)，以语料库为准，会随语料库同步。
-- **能不能商用**：**不能**。这一章的内容单独采用 CC BY-NC-SA 4.0，详见[九、协议](#九协议)。
+Dữ liệu tri thức có cấu trúc 14 sao chính × 12 cung vị, dùng để tạo nội dung hoặc xây kho tri thức.
 
 ---
 
-## 六、界面是一份 Demo
+## V. Lời gốc «Thiên Kỷ · Tử Vi Đẩu Số» của thầy Nghê
 
-界面代码在 `app/` 与 `components/`。仓库里的界面是**一套最小可运行示例**，作用是把排盘引擎跑起来、把盘画出来，方便你在它基础上做自己的产品。**线上商业版的界面不在开源范围内**，两者差距很大：
+![Một hình xem hết «Thiên Kỷ · Tử Vi Đẩu Số» của Nghê Hải Hạ](./docs/tianji-ziwei/overview.png)
 
-| 页面 / 组件 | 本仓库（Demo） | 线上商业版 |
+Lời gốc «Thiên Kỷ» phần Tử Vi Đẩu Số của Nghê Hải Hạ tổng cộng **1.848 câu**: chính khoá 14 bài (bài 2–15 nửa đầu) cộng 2 đoạn bổ sung, chia theo bài thành 16 file, đặt trong [`docs/tianji-ziwei/`](./docs/tianji-ziwei/). Câu nào cũng kèm thời gian xuất xứ, bấm vào là nhảy về đúng giây đó trong video gốc trên Bilibili.
+
+- **Cách đọc**: tìm chủ đề muốn xem trong hình tổng quan trên, rồi bấm vào bài tương ứng, ví dụ [5 thượng](./docs/tianji-ziwei/5%E4%B8%8A.md) (Tử Vi tại Tý), [13 thượng](./docs/tianji-ziwei/13%E4%B8%8A.md) (Sát Phá Lang, Khoa Quyền Lộc tam hội).
+- **Lấy từ đâu**: lấy từ kho chị em [nihai-tianji-corpus](https://github.com/Renhuai123/nihai-tianji-corpus), lấy kho ngữ liệu làm chuẩn, sẽ đồng bộ theo kho ngữ liệu.
+- **Dùng thương mại được không**: **Không**. Nội dung chương này dùng riêng giấy phép CC BY-NC-SA 4.0, xem chi tiết ở [IX. Giấy phép](#ix-giấy-phép).
+
+---
+
+## VI. Giao diện chỉ là bản Demo
+
+Code giao diện nằm trong `app/` và `components/`. Giao diện trong kho là **một ví dụ tối thiểu chạy được**, tác dụng là chạy engine lập lá số lên, vẽ lá số ra, để bạn tiện làm sản phẩm của riêng mình trên nền đó. **Giao diện của bản thương mại trên mạng không nằm trong phạm vi mã nguồn mở**, hai bên chênh nhau rất lớn:
+
+| Trang / Component | Trong kho này (Demo) | Bản thương mại trên mạng |
 |------|------|------|
-| 排盘页 `app/chart/page.tsx` | 75 行 | 1227 行 |
-| 解读面板 `InsightPanel` | 467 行 | 5088 行 |
-| 命盘方格 `ChartBoard` | 285 行 | 1334 行 |
-| 宫位格 `PalaceCell` | 201 行 | 1192 行 |
-| 合盘页 `app/heming/page.tsx` | 368 行 | 1937 行 |
+| Trang lập lá số `app/chart/page.tsx` | 75 dòng | 1227 dòng |
+| Panel luận giải `InsightPanel` | 467 dòng | 5088 dòng |
+| Ô lá số `ChartBoard` | 285 dòng | 1334 dòng |
+| Ô cung `PalaceCell` | 201 dòng | 1192 dòng |
+| Trang hợp bàn `app/heming/page.tsx` | 368 dòng | 1937 dòng |
 
-**Demo 能跑通的**：出生信息表单、命盘方格与宫位详情、本命 / 大限 / 流年切换、古籍阅读器（全文搜索）、命理百科（14 主星 × 12 宫位）、亮暗主题、移动端适配。
+**Demo chạy thông được**: form thông tin sinh, ô lá số và chi tiết cung vị, chuyển Bản mệnh / Đại hạn / Lưu niên, trình đọc cổ thư (tìm kiếm toàn văn), bách khoa mệnh lý (14 sao chính × 12 cung vị), giao diện sáng/tối, tương thích di động.
 
-**Demo 里没有的**：线上重做过的交互界面、AI 流式解读、合盘图谱、分享卡片，以及**断语内容本身**（`db-analysis.ts` 是占位实现）。也就是说，Demo 画得出盘，但给不出线上那套解读。
+**Demo không có**: giao diện tương tác làm lại trên mạng, AI luận giải dạng stream, sơ đồ hợp bàn, thẻ chia sẻ, và **bản thân nội dung câu luận** (`db-analysis.ts` chỉ là bản giữ chỗ). Nghĩa là Demo vẽ được lá số, nhưng không đưa ra được bộ luận giải như trên mạng.
 
 ---
 
-## 七、开源边界：什么不在里面
+## VII. Ranh giới mã nguồn mở: gì không nằm trong này
 
-| | 内容 |
+| | Nội dung |
 |---|---|
-| ✅ **开源** | 排盘引擎（`lib/ziwei/`）、古籍公版原文（`lib/classics/`）、SEO 知识图谱（`lib/seo/`）、Demo 界面、51.8 万样本数据集、13 维解读数据集 v4.0 |
-| ❌ **不开源** | 断语库（`lib/ziwei/db-analysis.ts` 是占位，线上是上万行的 13 主题断语）、AI 解读 prompt、后端 API（`/api/interpret` 等）、用户系统（登录 / 会员 / 支付）、服务端安全（签名、防刷、水印）、部署配置 |
+| ✅ **Mã nguồn mở** | Engine lập lá số (`lib/ziwei/`), cổ thư nguyên văn thuộc phạm vi công cộng (`lib/classics/`), sơ đồ tri thức SEO (`lib/seo/`), giao diện Demo, bộ dữ liệu mẫu 518 nghìn lá số, bộ dữ liệu luận giải 13 chiều v4.0 |
+| ❌ **Không mở** | Kho câu luận (`lib/ziwei/db-analysis.ts` chỉ là bản giữ chỗ, trên mạng là hơn mười nghìn dòng câu luận 13 chủ đề), prompt AI luận giải, API backend (`/api/interpret`…), hệ người dùng (đăng nhập / thành viên / thanh toán), an toàn phía server (chữ ký, chống spam, watermark), cấu hình triển khai |
 
-如果你需要 AI 解读能力，可以参考 `lib/ziwei/patterns.ts` 和 `heming-knowledge.ts` 里的知识库，结合任意 LLM 自行构建 prompt。
-
----
-
-## 八、维护节奏与贡献
-
-这个仓库是**排盘引擎 + 数据集的开放快照**，不是一个全职维护的开源产品，说清楚免得大家猜：
-
-- **引擎同步**：随线上发版同步 `lib/ziwei/` 的引擎层并打 tag；断语库、AI 解读、商业站前端不在同步范围内。
-- **Issue**：会看，但回复可能不及时；带复现步骤或具体盘例（年月日时 + 性别 + 哪一条不对）的问题优先处理。
-- **PR**：欢迎，尤其是回归测试、口径修正、文档。动到排盘口径的改动请附上依据（古籍原文或可核对的对照）。
+Nếu bạn cần khả năng AI luận giải, có thể tham khảo kho tri thức trong `lib/ziwei/patterns.ts` và `heming-knowledge.ts`, kết hợp với bất kỳ LLM nào để tự xây prompt.
 
 ---
 
-## 九、协议
+## VIII. Nhịp bảo trì và đóng góp
 
-本仓库分四部分授权。前三部分是宽松协议，**商用没有限制**；倪师原话目录**不许商用**：
+Kho này là **ảnh chụp mở của engine lập lá số + bộ dữ liệu**, không phải một sản phẩm mã nguồn mở có người bảo trì toàn thời gian, nói rõ để mọi người khỏi đoán:
 
-| 内容 | 协议 | 简单说 |
-|------|------|--------|
-| **代码**（`lib/`、`app/`、`components/`） | [MIT License](./LICENSE) | 拿去随便用，保留 LICENSE 文件即可 |
-| **数据**（Releases 中的 51.8 万样本数据集 v3.0、13 维解读数据集 v4.0） | [CC BY 4.0](./DATASET-LICENSE) · 要求 attribution | 商用也行，**注明数据来源即可** |
-| **古籍原文**（骨髓赋、紫微斗数全集 / 全书等） | Public Domain | 古书都是公有领域，不存在版权 |
-| **倪师原话**（[`docs/tianji-ziwei/`](./docs/tianji-ziwei/)） | [CC BY-NC-SA 4.0](./docs/tianji-ziwei/LICENSE.md) | 可以引用、转载，注明出处；**不许商用**，改编后用同样协议 |
-
-**一句话**：代码和数据拿去用，商用也行，把来源链接带上就行；倪师原话只限非商业的学习研究（数据集解读里引用的倪师原话同样不在数据授权范围内）。
+- **Đồng bộ engine**: theo đợt phát hành trên mạng để đồng bộ tầng engine trong `lib/ziwei/` và gắn tag; kho câu luận, AI luận giải, frontend của trang thương mại không nằm trong phạm vi đồng bộ.
+- **Issue**: sẽ đọc, nhưng trả lời có thể không kịp; issue có bước tái hiện hoặc ví dụ lá số cụ thể (năm tháng ngày giờ + giới tính + chỗ nào sai) được ưu tiên xử lý.
+- **PR**: hoan nghênh, nhất là kiểm thử hồi quy, sửa khẩu kính, tài liệu. Thay đổi nào động đến khẩu kính lập lá số xin kèm căn cứ (nguyên văn cổ thư hoặc đối chiếu kiểm chứng được).
 
 ---
 
-## 十、关于与联系
+## IX. Giấy phép
 
-### 项目理念
+Kho này chia bốn phần cấp phép. Ba phần đầu là giấy phép thoáng, **dùng thương mại không giới hạn**; riêng mục lời thầy Nghê **không được dùng thương mại**:
 
-见本页开头。想自己搭？代码都在这里，拿去用。嫌麻烦？来 [ouranic.cn](https://ouranic.cn/?from=gh-readme) 直接用。
+| Nội dung | Giấy phép | Nói gọn |
+|------|------|------|
+| **Code** (`lib/`, `app/`, `components/`) | [MIT License](./LICENSE) | Cứ lấy mà dùng, giữ lại file LICENSE là được |
+| **Dữ liệu** (trong Releases: bộ dữ liệu mẫu 518 nghìn lá số v3.0, bộ dữ liệu luận giải 13 chiều v4.0) | [CC BY 4.0](./DATASET-LICENSE) · Yêu cầu attribution | Dùng thương mại cũng được, **ghi rõ nguồn dữ liệu là được** |
+| **Cổ thư nguyên văn** (Cốt Tủy Phú, Tử Vi Đẩu Số Toàn Tập / Toàn Thư…) | Public Domain | Sách cổ đều thuộc phạm vi công cộng, không có bản quyền |
+| **Lời thầy Nghê** ([`docs/tianji-ziwei/`](./docs/tianji-ziwei/)) | [CC BY-NC-SA 4.0](./docs/tianji-ziwei/LICENSE.md) | Được trích dẫn, đăng lại, ghi rõ nguồn; **không dùng thương mại**, bản chỉnh sửa dùng cùng giấy phép |
 
-### 技术栈
+**Một câu**: code và dữ liệu cứ lấy mà dùng, thương mại cũng được, chỉ cần kèm link nguồn; lời thầy Nghê chỉ dùng cho học tập nghiên cứu phi thương mại (lời thầy Nghê trích trong phần luận giải của bộ dữ liệu cũng không nằm trong phạm vi cấp phép dữ liệu).
 
-- **框架**：Next.js 16（App Router）
-- **语言**：TypeScript
-- **样式**：Tailwind CSS + CSS Variables 设计系统
-- **排盘**：基于 [iztro](https://github.com/SylarLong/iztro) + lunar-javascript
-- **动画**：Framer Motion
+---
 
-### 联系
+## X. Về dự án và liên hệ
 
-- 线上平台：[ouranic.cn](https://ouranic.cn/?from=gh-readme)（已完成 ICP 备案：京ICP备2026069066号-1）
-- 提问题、提修复：见 [CONTRIBUTING.md](./CONTRIBUTING.md)；使用交流请到 [讨论区](https://github.com/Renhuai123/ziwei-doushu/discussions)
-- 💕 发财的小手点一下：小红书 / 抖音 / 闲鱼 / X 关注 **王多鱼AI**，第一时间看上线 + 解锁更多紫微干货～
+### Ý tưởng dự án
+
+Xem đầu trang. Muốn tự dựng? Code ở hết đây, cứ lấy mà dùng. Ngại phiền? Vào [ouranic.cn](https://ouranic.cn/?from=gh-readme) dùng trực tiếp.
+
+### Công nghệ
+
+- **Framework**: Next.js 16 (App Router)
+- **Ngôn ngữ**: TypeScript
+- **Kiểu dáng**: Tailwind CSS + hệ thiết kế CSS Variables
+- **Lập lá số**: dựa trên [iztro](https://github.com/SylarLong/iztro) + lunar-javascript
+- **Hoạt ảnh**: Framer Motion
+
+### Liên hệ
+
+- Nền tảng trực tuyến: [ouranic.cn](https://ouranic.cn/?from=gh-readme) (đã hoàn tất đăng ký ICP: Kinh ICP bị 2026069066-1)
+- Góp ý, báo lỗi: xem [CONTRIBUTING.md](./CONTRIBUTING.md); trao đổi sử dụng xin vào [khu thảo luận](https://github.com/Renhuai123/ziwei-doushu/discussions)
+- 💕 Bàn tay nhỏ phát tài bấm một cái: Tiểu Hồng Thư / Douyin / Xianyu / X theo dõi **王多鱼AI** để xem lên sóng sớm nhất + mở khoá thêm nhiều kiến thức Tử Vi～
+
+---
+
+## Ghi chú bản dịch (bản fork Việt hoá)
+
+- Repo gốc viết bằng tiếng Trung và chưa có hệ thống i18n (không dùng next-intl hay file locale). Bản này dịch **trực tiếp chuỗi hiển thị trong code** — tức chuỗi tiếng Trung trong component/page được thay bằng tiếng Việt tại chỗ, không đổi tên biến, key hay logic. Nếu sau này muốn làm i18n đúng chuẩn (chuyển được Trung/Việt), đó là một bước riêng.
+- Tên sao, cung, can chi, Tứ Hóa chỉ tra cứu khi hiển thị, qua bảng tra trong [`lib/ziwei/vi-names.ts`](./lib/ziwei/vi-names.ts) — key gốc không đổi nên engine, test hồi quy và dữ liệu không bị ảnh hưởng. Tên nào chưa có trong bảng sẽ hiển thị nguyên tên gốc.
+- Nội dung **chưa dịch trong vòng này**: kho tri thức chi tiết (14 sao × 13 cung), bộ dữ liệu luận giải, 1.848 trích dẫn «Thiên Kỷ», trang hợp bàn, trang điều khoản/riêng tư, và cửa sổ thông báo khuyến mãi của site gốc.
+- Nơi sinh trong form lập lá số: repo gốc chỉ có tỉnh/thành Trung Quốc. Bản này thêm mục **Việt Nam** (Hà Nội, TP. Hồ Chí Minh, Đà Nẵng, Hải Phòng, Cần Thơ, Huế, Nha Trang, Đà Lạt, Vinh, Quy Nhơn…) kèm kinh độ để hiệu chỉnh giờ mặt trời thật. Lưu ý: engine mặc định nhập giờ theo **giờ Bắc Kinh (UTC+8)** — người sinh ở Việt Nam (UTC+7) cần cộng thêm 1 giờ trước khi nhập, rồi chọn thành phố Việt Nam để hiệu chỉnh kinh độ.

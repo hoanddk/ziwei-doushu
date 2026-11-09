@@ -699,6 +699,25 @@ export const PROVINCES: ProvinceInfo[] = [
     ],
   },
 
-  // 注：海外出生暂未支持，因 share.ts 真太阳时算法假设输入为北京时间(UTC+8)。
+  // ─── 越南（Việt Nam）───────────────────────────────────────
+  //   Người sinh ở Việt Nam: nhập giờ sinh sau khi cộng 1 giờ để đổi sang giờ Bắc Kinh (UTC+8),
+  //   rồi chọn thành phố dưới đây để hiệu chỉnh giờ mặt trời thật theo kinh độ.
+  {
+    name: 'Việt Nam',
+    cities: [
+      { name: 'Hà Nội', longitude: 105.85 },
+      { name: 'TP. Hồ Chí Minh', longitude: 106.7 },
+      { name: 'Đà Nẵng', longitude: 108.2 },
+      { name: 'Hải Phòng', longitude: 106.68 },
+      { name: 'Cần Thơ', longitude: 105.78 },
+      { name: 'Huế', longitude: 107.58 },
+      { name: 'Nha Trang', longitude: 109.19 },
+      { name: 'Đà Lạt', longitude: 108.46 },
+      { name: 'Vinh', longitude: 105.68 },
+      { name: 'Quy Nhơn', longitude: 109.23 },
+    ],
+  },
+
+  // 注：除越南（上）外，海外出生暂未支持，因 share.ts 真太阳时算法假设输入为北京时间(UTC+8)。
   // 海外用户请把当地时间换算成北京时间再填写（或填出生时所在的中国时区相对城市）。
 ];
