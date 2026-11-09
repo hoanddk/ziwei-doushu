@@ -64,8 +64,8 @@ export interface DingFuGe {
 export const DING_FU_GE: DingFuGe[] = [
   {
     no: 1,
-    name: '财荫夹印',
-    note: '相守命，武梁来夹是也，田宅宫亦然',
+    name: 'Tài Ấm giáp Ấn',
+    note: 'Tướng thủ Mệnh, Vũ Lương đến giáp là vậy, cung Điền Trạch cũng vậy',
     status: 'unreachable',
     inProject: 'none',
     why:
@@ -77,8 +77,8 @@ export const DING_FU_GE: DingFuGe[] = [
   },
   {
     no: 2,
-    name: '日月夹财',
-    note: '武守命，日月来夹是也，财帛宫亦然',
+    name: 'Nhật Nguyệt giáp Tài',
+    note: 'Vũ thủ Mệnh, Nhật Nguyệt đến giáp là vậy, cung Tài Bạch cũng vậy',
     status: 'derivable',
     inProject: 'none',
     // 形态唯一：太阳→武曲 delta 恒 1（太阳恒在武曲后一宫），「前日后月」的
@@ -99,8 +99,8 @@ export const DING_FU_GE: DingFuGe[] = [
   },
   {
     no: 3,
-    name: '财禄夹马',
-    note: '马守命，武禄来夹是也，逢生旺尤妙',
+    name: 'Tài Lộc giáp Mã',
+    note: 'Mã thủ Mệnh, Vũ Lộc đến giáp là vậy, gặp sinh vượng càng hay',
     status: 'derivable',
     inProject: 'none',
     // 形态唯一：禄存永不在天马前一位（结构性恒真：天马只在寅申巳亥，
@@ -116,8 +116,8 @@ export const DING_FU_GE: DingFuGe[] = [
   },
   {
     no: 4,
-    name: '荫印拱身',
-    note: '身临田宅，梁相拱冲是也，勿坐空亡',
+    name: 'Ấm Ấn củng Thân',
+    note: 'Thân lâm Điền Trạch, Lương Tướng củng xung là vậy, chớ tọa Không Vong',
     status: 'unreachable',
     inProject: 'none',
     why:
@@ -128,8 +128,8 @@ export const DING_FU_GE: DingFuGe[] = [
   },
   {
     no: 5,
-    name: '日月照璧',
-    note: '日月临田宅宫是也，喜居墓库',
+    name: 'Nhật Nguyệt chiếu Bích',
+    note: 'Nhật Nguyệt lâm cung Điền Trạch là vậy, thích cư mộ khố',
     status: 'derivable',
     inProject: 'none',
     // 日月同宫只在丑、未（墓库），注文「喜居墓库」由安星法自动满足。
@@ -144,8 +144,8 @@ export const DING_FU_GE: DingFuGe[] = [
   },
   {
     no: 6,
-    name: '金灿光辉',
-    note: '太阳单守，命在午宫是也',
+    name: 'Kim xán quang huy',
+    note: 'Thái Dương đơn thủ, Mệnh tại cung Ngọ là vậy',
     status: 'derivable',
     inProject: 'none',
     fn: c => c.mingGongBranch === 6 && has(c, 6, '太阳') && majorCount(c, 6) === 1,

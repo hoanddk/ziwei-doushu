@@ -122,8 +122,8 @@ export interface DingGuiGe {
 export const DING_GUI_GE: DingGuiGe[] = [
   {
     no: 1,
-    name: '日月夹命',
-    note: '不坐空亡，遇逢本宫有吉星是也',
+    name: 'Nhật Nguyệt giáp Mệnh',
+    note: 'Không tọa Không Vong, gặp bản cung có cát tinh là vậy',
     status: 'derivable',
     inProject: 'loose',
     // 项目判了「日月夹」+ 亮度，漏掉「不坐空亡」「本宫有吉星」两道门槛，故偏松。
@@ -137,8 +137,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 2,
-    name: '日出扶桑',
-    note: '日在卯守命是也，守官禄宫亦然',
+    name: 'Nhật xuất Phù Tang',
+    note: 'Nhật tại Mão thủ Mệnh là vậy, thủ cung Quan Lộc cũng vậy',
     status: 'derivable',
     inProject: 'none',
     // 卯为太阳庙地。注文给了两个落点：命宫在卯，或官禄宫在卯。
@@ -148,8 +148,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 3,
-    name: '月落亥宫',
-    note: '月在亥守命是也，又名月朗天门',
+    name: 'Nguyệt lạc cung Hợi',
+    note: 'Nguyệt tại Hợi thủ Mệnh là vậy, còn gọi là Nguyệt Lãng Thiên Môn',
     status: 'derivable',
     inProject: 'none',
     // 亥为太阴庙地，天门即亥。
@@ -157,8 +157,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 4,
-    name: '月生沧海',
-    note: '月在子宫守田宅是也',
+    name: 'Nguyệt sinh Thương Hải',
+    note: 'Nguyệt tại Tý thủ Điền Trạch là vậy',
     status: 'derivable',
     inProject: 'none',
     // 子宫为沧海。与第 3 条成对：一守命、一守田宅。
@@ -166,8 +166,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 5,
-    name: '辅弼拱主',
-    note: '紫微守命，二星来拱是也，夹之亦然',
+    name: 'Phụ Bật củng chủ',
+    note: 'Tử Vi thủ Mệnh, hai sao đến củng là vậy, giáp cũng vậy',
     status: 'derivable',
     inProject: 'loose',
     // 注文两层：先「紫微守命」（前提），再「拱」（三方）或「夹」（前后）。
@@ -185,8 +185,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 6,
-    name: '君臣庆会',
-    note: '紫微左右同守命是也，更会相武阴妙上',
+    name: 'Quân Thần Khánh Hội',
+    note: 'Tử Vi Tả Hữu đồng thủ Mệnh là vậy, lại hội Tướng Vũ Âm càng hay',
     status: 'derivable',
     inProject: 'loose',
     // 「同守命」三字是关键：同宫，不是三方四正会照。
@@ -199,8 +199,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 7,
-    name: '财印夹禄',
-    note: '禄守命，梁相来夹是也，入财亦然',
+    name: 'Tài Ấn giáp Lộc',
+    note: 'Lộc thủ Mệnh, Lương Tướng đến giáp là vậy, nhập Tài cũng vậy',
     status: 'unreachable',
     why:
       '天梁与天相的相对宫位是恒定的：天梁永远在天相顺时针下一宫（相→梁 宫距恒为 1，' +
@@ -210,8 +210,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 8,
-    name: '禄马佩印',
-    note: '马前有禄，印星同宫是也',
+    name: 'Lộc Mã bội Ấn',
+    note: 'Trước Mã có Lộc, sao ấn đồng cung là vậy',
     status: 'derivable',
     inProject: 'none',
     // ⚠️ 注文「马前有禄」按字面不可达——这是结构性恒真：天马只在寅申巳亥，
@@ -231,8 +231,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 9,
-    name: '坐贵向贵',
-    note: '谓魁钺在命迭相坐拱是也',
+    name: 'Tọa Quý hướng Quý',
+    note: 'Nói Khôi Việt tại Mệnh lần lượt tọa củng là vậy',
     status: 'derivable',
     inProject: 'loose',
     // 「坐拱」= 一在命宫（坐），一在对宫（向）。项目做的是「夹」与「同会」，都不是坐拱。
@@ -245,8 +245,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 10,
-    name: '马头带剑',
-    note: '谓马有刃是也，不是居午格',
+    name: 'Mã Đầu Đái Kiếm',
+    note: 'Nói Mã có Nhận là vậy, không phải cách cư Ngọ',
     status: 'unreachable',
     why:
       '「马有刃」= 天马与擎羊同宫。天马只居寅申巳亥，且恒在禄存前一宫或与禄存同宫；' +
@@ -257,8 +257,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 11,
-    name: '七杀朝斗',
-    note: '见前批注。〈骨髓赋〉：「七杀朝斗，爵禄荣昌」',
+    name: 'Thất Sát triều Đẩu',
+    note: 'Xem chú thích trước. «Cốt Tủy Phú»: “Thất Sát triều Đẩu, tước lộc vinh xương”',
     status: 'derivable',
     inProject: 'none',
     // 斗 = 北斗（子午），朝斗取七杀守命于寅申子午四宫。
@@ -266,8 +266,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 12,
-    name: '日月并明',
-    note: '见前批注。通行解：太阳在巳、太阴在酉，命坐巳或酉',
+    name: 'Nhật Nguyệt tịnh minh',
+    note: 'Xem chú thích trước. Cách hiểu thông hành: Thái Dương tại Tỵ, Thái Âm tại Dậu, Mệnh tọa Tỵ hoặc Dậu',
     status: 'disputed',
     why:
       '注文只作「见前批注」，而〈骨髓赋〉无「日月并明」四字，各家所定宫位不一' +
@@ -279,8 +279,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 13,
-    name: '明珠出海',
-    note: '见前批注。命未空宫，对宫丑日月同度拱照',
+    name: 'Minh Châu Xuất Hải',
+    note: 'Xem chú thích trước. Mệnh tại Mùi là cung trống, đối cung Sửu Nhật Nguyệt đồng độ củng chiếu',
     status: 'derivable',
     inProject: 'ok',
     // 命在未、本宫无主星，对宫（丑）太阳太阴同宫。项目条件与此一致。
@@ -294,8 +294,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 14,
-    name: '日月同临',
-    note: '见前批注。日月同宫守命',
+    name: 'Nhật Nguyệt đồng lâm',
+    note: 'Xem chú thích trước. Nhật Nguyệt đồng cung thủ Mệnh',
     status: 'derivable',
     inProject: 'ok',
     // 项目名作「日月同宫」，条件一致。
@@ -306,8 +306,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 15,
-    name: '刑囚夹印',
-    note: '天刑廉贞同临身命，主武勇之人',
+    name: 'Hình Tù giáp Ấn',
+    note: 'Thiên Hình Liêm Trinh cùng lâm Thân Mệnh, chủ người võ dũng',
     status: 'derivable',
     inProject: 'none',
     // 名为「夹印」，注文却只说「同临身命」，未及印星（天相）。
@@ -321,8 +321,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 16,
-    name: '科权禄拱',
-    note: '见前批注。科权禄三化会命三方',
+    name: 'Khoa Quyền Lộc củng',
+    note: 'Xem chú thích trước. Khoa Quyền Lộc tam hóa hội tam phương cung Mệnh',
     status: 'derivable',
     inProject: 'partial',
     // 项目只做科权双会，缺化禄。
@@ -333,8 +333,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 17,
-    name: '贪火相逢',
-    note: '谓二星守命同居庙旺是也',
+    name: 'Tham Hỏa tương phùng',
+    note: 'Hai sao thủ Mệnh cùng cư miếu vượng là vậy',
     status: 'derivable',
     inProject: 'none',
     // 「同居庙旺」按字面：两星须同在庙或旺。实测触发率 0.08%，是全表最稀的一条。
@@ -346,8 +346,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 18,
-    name: '武曲守垣',
-    note: '武守命卯宫是也，余不是',
+    name: 'Vũ Khúc thủ viên',
+    note: 'Vũ thủ Mệnh tại cung Mão là vậy, còn lại không phải',
     status: 'derivable',
     inProject: 'none',
     // 「余不是」三字堵死了放宽：只认卯宫。
@@ -355,8 +355,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 19,
-    name: '府相朝垣',
-    note: '见前批注。命寅申，府相分居财帛、官禄朝命',
+    name: 'Phủ Tướng triều viên',
+    note: 'Xem chú thích trước. Mệnh tại Dần Thân, Phủ Tướng phân cư Tài Bạch, Quan Lộc triều Mệnh',
     status: 'derivable',
     inProject: 'loose',
     // 两道门槛：命宫限寅申；天府天相分占财帛、官禄两宫（原文未指定谁在哪宫）。
@@ -373,8 +373,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 20,
-    name: '紫府朝垣',
-    note: '见前批注。命坐寅申，紫府同宫',
+    name: 'Tử Phủ triều viên',
+    note: 'Xem chú thích trước. Mệnh tọa Dần Thân, Tử Phủ đồng cung',
     status: 'derivable',
     inProject: 'none',
     // 紫微天府只在寅申同宫，故「命坐寅申」与「紫府同宫」实为一事的两面。
@@ -385,8 +385,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 21,
-    name: '文星暗拱',
-    note: '见前批注。昌曲夹命（暗拱）',
+    name: 'Văn Tinh ám củng',
+    note: 'Xem chú thích trước. Xương Khúc giáp Mệnh (ám củng)',
     status: 'unreachable',
     why:
       '文昌与文曲的相对宫位恒为偶数（0/2/4/6/8/10，全十二时辰 1,152 盘实测），' +
@@ -396,8 +396,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 22,
-    name: '权禄生逢',
-    note: '二星守命庙旺是也，陷不是',
+    name: 'Quyền Lộc sinh phùng',
+    note: 'Hai sao thủ Mệnh miếu vượng là vậy, hãm thì không phải',
     status: 'derivable',
     inProject: 'none',
     // 两道条件：化权、化禄同守命宫；且所化之星不落陷。
@@ -410,8 +410,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 23,
-    name: '羊刃入庙',
-    note: '辰戌丑未守命遇吉是也',
+    name: 'Dương Nhận nhập miếu',
+    note: 'Thìn Tuất Sửu Mùi thủ Mệnh gặp cát là vậy',
     status: 'derivable',
     inProject: 'none',
     // 擎羊在四墓宫（丑辰未戌）恒为庙，此为安星表所定，非概率。
@@ -424,8 +424,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 24,
-    name: '巨机居卯',
-    note: '见前批注。巨门天机同宫卯守命',
+    name: 'Cự Cơ cư Mão',
+    note: 'Xem chú thích trước. Cự Môn Thiên Cơ đồng cung tại Mão thủ Mệnh',
     status: 'derivable',
     inProject: 'none',
     // 机巨只在卯酉同宫，注文取卯（庙地）。
@@ -433,8 +433,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 25,
-    name: '明禄暗禄',
-    note: '见前批注。禄存守命（明），对宫化禄（暗）',
+    name: 'Minh Lộc Ám Lộc',
+    note: 'Xem chú thích trước. Lộc Tồn thủ Mệnh (minh), đối cung Hóa Lộc (ám)',
     status: 'derivable',
     inProject: 'none',
     fn: c => {
@@ -444,8 +444,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 26,
-    name: '科明暗禄',
-    note: '见前批注（所指赋句不明，通行注家有二解）',
+    name: 'Khoa Minh Ám Lộc',
+    note: 'Xem chú thích trước (câu phú chỉ đến chưa rõ, các nhà chú thông hành có hai cách hiểu)',
     status: 'disputed',
     why:
       '注文仅「见前批注」，所指不明。此处按与上条对举的读法：命宫坐化科（明），' +
@@ -458,8 +458,8 @@ export const DING_GUI_GE: DingGuiGe[] = [
   },
   {
     no: 27,
-    name: '金舆扶驾',
-    note: '紫微守命，前后有日月来夹是也',
+    name: 'Kim Dư phù giá',
+    note: 'Tử Vi thủ Mệnh, trước sau có Nhật Nguyệt đến giáp là vậy',
     status: 'unreachable',
     why:
       '紫微与太阳的宫位差恒为 9（紫微在 b 则太阳恒在 b+9，即紫微后三宫），' +

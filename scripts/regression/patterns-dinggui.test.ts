@@ -42,7 +42,7 @@ assert.equal(new Set(DING_GUI_GE.map(g => g.name)).size, 27, '格名不得重复
 // 每条都必须写明注文；「见前批注」的要补出所据赋句
 for (const g of DING_GUI_GE) {
   assert.ok(g.note.length > 0, `${g.name} 缺注文`);
-  assert.ok(!/^见前批注。?$/.test(g.note), `${g.name} 只写了「见前批注」，须补出所据赋句`);
+  assert.ok(!/^Xem chú thích trước\.?$/.test(g.note), `${g.name} chỉ ghi “Xem chú thích trước”, cần bổ sung câu phú làm căn cứ`);
 }
 
 // 状态三分：可实现 23、无解 4、存疑 2
@@ -50,7 +50,7 @@ assert.equal(DING_GUI_JUDGEABLE, 23, '可判定条目应为 23 条（27 - 4 无�
 assert.equal(DING_GUI_UNREACHABLE.length, 4, '安星无解的条目应为 4 条');
 assert.deepEqual(
   DING_GUI_UNREACHABLE.map(g => g.name).sort(),
-  ['财印夹禄', '文星暗拱', '金舆扶驾', '马头带剑'].sort(),
+  ['Tài Ấn giáp Lộc', 'Văn Tinh ám củng', 'Kim Dư phù giá', 'Mã Đầu Đái Kiếm'].sort(),
   '无解条目清单变动须同步更新文档与理由',
 );
 for (const g of DING_GUI_UNREACHABLE) {
@@ -133,31 +133,31 @@ assert.ok(
  * 三时辰样本里这两条都为 0，补满十二时辰后分别是 16 例与 189 例）。
  */
 const GOLDEN: Array<[number, number, number, number, string]> = [
-  [1990, 1, 5, 0, '日月夹命'],
-  [1990, 1, 27, 3, '日出扶桑'],
-  [1990, 1, 27, 3, '月落亥宫'],
-  [1990, 1, 15, 4, '月生沧海'],
-  [1990, 1, 9, 2, '辅弼拱主'],
-  [1990, 11, 21, 10, '君臣庆会'],
+  [1990, 1, 5, 0, 'Nhật Nguyệt giáp Mệnh'],
+  [1990, 1, 27, 3, 'Nhật xuất Phù Tang'],
+  [1990, 1, 27, 3, 'Nguyệt lạc cung Hợi'],
+  [1990, 1, 15, 4, 'Nguyệt sinh Thương Hải'],
+  [1990, 1, 9, 2, 'Phụ Bật củng chủ'],
+  [1990, 11, 21, 10, 'Quân Thần Khánh Hội'],
   // 特意取「禄存居天马后一宫」形态的首例（1993-2-7 时3，_probe/_lu_ma.ts 搜得）——
   // 该形态旧版（禄在马前隔位的错读）永远无法命中，保留它防止回退。
-  [1993, 2, 7, 3, '禄马佩印'],
-  [1990, 1, 27, 1, '坐贵向贵'],
-  [1990, 1, 3, 5, '七杀朝斗'],
-  [1990, 1, 9, 8, '日月并明'],
-  [1990, 1, 11, 6, '明珠出海'],
-  [1990, 1, 3, 0, '日月同临'],
-  [1990, 1, 11, 5, '刑囚夹印'],
-  [1991, 2, 17, 3, '科权禄拱'],
-  [1990, 7, 15, 9, '贪火相逢'],
-  [1990, 2, 1, 11, '武曲守垣'],
-  [1990, 1, 3, 11, '府相朝垣'],
-  [1990, 1, 7, 11, '紫府朝垣'],
-  [1990, 1, 5, 0, '权禄生逢'],
-  [1990, 1, 1, 6, '羊刃入庙'],
-  [1990, 1, 19, 10, '巨机居卯'],
-  [1990, 1, 11, 7, '明禄暗禄'],
-  [1990, 1, 13, 1, '科明暗禄'],
+  [1993, 2, 7, 3, 'Lộc Mã bội Ấn'],
+  [1990, 1, 27, 1, 'Tọa Quý hướng Quý'],
+  [1990, 1, 3, 5, 'Thất Sát triều Đẩu'],
+  [1990, 1, 9, 8, 'Nhật Nguyệt tịnh minh'],
+  [1990, 1, 11, 6, 'Minh Châu Xuất Hải'],
+  [1990, 1, 3, 0, 'Nhật Nguyệt đồng lâm'],
+  [1990, 1, 11, 5, 'Hình Tù giáp Ấn'],
+  [1991, 2, 17, 3, 'Khoa Quyền Lộc củng'],
+  [1990, 7, 15, 9, 'Tham Hỏa tương phùng'],
+  [1990, 2, 1, 11, 'Vũ Khúc thủ viên'],
+  [1990, 1, 3, 11, 'Phủ Tướng triều viên'],
+  [1990, 1, 7, 11, 'Tử Phủ triều viên'],
+  [1990, 1, 5, 0, 'Quyền Lộc sinh phùng'],
+  [1990, 1, 1, 6, 'Dương Nhận nhập miếu'],
+  [1990, 1, 19, 10, 'Cự Cơ cư Mão'],
+  [1990, 1, 11, 7, 'Minh Lộc Ám Lộc'],
+  [1990, 1, 13, 1, 'Khoa Minh Ám Lộc'],
 ];
 
 // 黄金表必须覆盖全部可实现条目，不多不少

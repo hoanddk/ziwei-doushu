@@ -179,7 +179,7 @@ export default function ChartSummary({ chart }: ChartSummaryProps) {
                     <div className="flex gap-1 ml-auto">
                       {p.palaces.slice(0, 2).map(pa => (
                         <span key={pa} className={`text-[8px] px-1.5 py-px rounded-full border ${st.badge}`}>
-                          {VI_PALACE_SHORT[pa] ?? pa.replace('宫', '')}
+                          {VI_PALACE[pa] ?? VI_STAR[pa] ?? pa.replace('宫', '')}
                         </span>
                       ))}
                     </div>
@@ -194,21 +194,21 @@ export default function ChartSummary({ chart }: ChartSummaryProps) {
                         <div className="text-[9px] leading-relaxed" style={{ color: 'var(--t-text2)', opacity: 0.85 }}>
                           <span className="font-medium" style={{ color: 'var(--t-gold)' }}>Bắt buộc</span>
                           <span style={{ opacity: 0.6 }}> · </span>
-                          {p.conditions.required.join('、')}
+                          {p.conditions.required.join(', ')}
                         </div>
                       )}
                       {p.conditions.bonus && p.conditions.bonus.length > 0 && (
                         <div className="text-[9px] leading-relaxed" style={{ color: 'var(--t-text2)', opacity: 0.85 }}>
                           <span className="font-medium text-emerald-500">Cộng điểm</span>
                           <span style={{ opacity: 0.6 }}> · </span>
-                          {p.conditions.bonus.join('、')}
+                          {p.conditions.bonus.join(', ')}
                         </div>
                       )}
                       {p.conditions.breaking && p.conditions.breaking.length > 0 && (
                         <div className="text-[9px] leading-relaxed" style={{ color: 'var(--t-text2)', opacity: 0.85 }}>
                           <span className="font-medium text-orange-500">Phá cách</span>
                           <span style={{ opacity: 0.6 }}> · </span>
-                          {p.conditions.breaking.join('、')}
+                          {p.conditions.breaking.join(', ')}
                         </div>
                       )}
                     </div>

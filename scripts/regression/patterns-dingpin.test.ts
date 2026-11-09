@@ -42,7 +42,7 @@ assert.equal(DING_PIN_UNREACHABLE.length, 0, '定贫贱局无安星结构性无�
 const disputed = DING_PIN_GE.filter(g => g.status === 'disputed');
 assert.deepEqual(
   disputed.map(g => g.name).sort(),
-  ['日月藏辉', '马落空亡', '君子在野'].sort(),
+  ['Nhật Nguyệt tàng huy', 'Mã lạc Không Vong', 'Quân tử tại dã'].sort(),
   '存疑条目清单变动须同步更新文档与宽严取舍理由',
 );
 for (const g of disputed) {
@@ -130,14 +130,14 @@ assert.deepEqual(
  * 盘面算法若变动导致这些不再命中，测试应当失败，不该放宽。
  */
 const GOLDEN: Array<[number, number, number, number, string]> = [
-  [1990, 1, 4, 2, '生不逢时'],
-  [1990, 11, 25, 0, '禄逢两杀'],
-  [1990, 1, 1, 2, '马落空亡'],
-  [1990, 1, 1, 1, '日月藏辉'],
-  [1990, 1, 4, 2, '财与囚仇'],
-  [1990, 1, 28, 11, '一生孤贫'],
-  [1990, 2, 25, 6, '君子在野'],
-  [1990, 12, 7, 3, '两重华盖'],
+  [1990, 1, 4, 2, 'Sinh bất phùng thời'],
+  [1990, 11, 25, 0, 'Lộc phùng lưỡng sát'],
+  [1990, 1, 1, 2, 'Mã lạc Không Vong'],
+  [1990, 1, 1, 1, 'Nhật Nguyệt tàng huy'],
+  [1990, 1, 4, 2, 'Tài dữ Tù cừu'],
+  [1990, 1, 28, 11, 'Nhất sinh cô bần'],
+  [1990, 2, 25, 6, 'Quân tử tại dã'],
+  [1990, 12, 7, 3, 'Lưỡng trùng Hoa Cái'],
 ];
 
 assert.deepEqual(

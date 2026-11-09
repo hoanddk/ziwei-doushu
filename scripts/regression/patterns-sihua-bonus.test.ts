@@ -48,12 +48,12 @@ assert.ok(sample.palaces.every(p => p.stars.every(s => !/^化[禄权科忌]$/.te
 // 逐日扫一年、固定午时，统计每个加分项「该出现」与「实际出现」的盘数
 const checks: { pattern: string; bonus: string; expect: (c: ZiweiChart) => boolean }[] = [
   {
-    pattern: '府相朝垣', bonus: '命宫见禄',
+    pattern: 'Phủ Tướng triều viên', bonus: 'Cung Mệnh gặp Lộc',
     expect: c => c.palaces.some(p => p.branch === c.mingGongBranch && p.stars.some(s => s.name === '禄存' || s.siHua === '禄')),
   },
-  { pattern: '杀破狼', bonus: '三方有化禄或化权（动得有力）', expect: c => sanFangHasSiHua(c, '禄') || sanFangHasSiHua(c, '权') },
-  { pattern: '机月同梁', bonus: '再会化科', expect: c => sanFangHasSiHua(c, '科') },
-  { pattern: '阳梁昌禄', bonus: '再会化科', expect: c => sanFangHasSiHua(c, '科') },
+  { pattern: 'Sát Phá Lang', bonus: 'Tam phương có Hóa Lộc hoặc Hóa Quyền (động mà có lực)', expect: c => sanFangHasSiHua(c, '禄') || sanFangHasSiHua(c, '权') },
+  { pattern: 'Cơ Nguyệt Đồng Lương', bonus: 'Lại hội Hóa Khoa', expect: c => sanFangHasSiHua(c, '科') },
+  { pattern: 'Dương Lương Xương Lộc', bonus: 'Lại hội Hóa Khoa', expect: c => sanFangHasSiHua(c, '科') },
 ];
 const hits = new Map<string, number>();
 const start = Date.UTC(1990, 0, 1);
@@ -68,15 +68,15 @@ for (let d = 0; d < 366; d++) {
     if (!p) continue;
     const want = expect(chart);
     const got = p.conditions?.bonus?.includes(bonus) ?? false;
-    assert.equal(got, want, `${dt.toISOString().slice(0, 10)} 午时 ${pattern}「${bonus}」应为 ${want}`);
+    assert.equal(got, want, `${dt.toISOString().slice(0, 10)} giờ Ngọ, cách ${pattern} — điều kiện «${bonus}» phải là ${want}`);
     if (got) hits.set(pattern, (hits.get(pattern) ?? 0) + 1);
   }
 }
 for (const { pattern } of checks) {
-  assert.ok((hits.get(pattern) ?? 0) > 0, `${pattern} 的四化加分项一次都没触发，样本覆盖不到或判断仍按星名`);
+  assert.ok((hits.get(pattern) ?? 0) > 0, `Cách ${pattern}: điều kiện cộng điểm Tứ Hóa chưa từng kích hoạt, mẫu chưa phủ tới hoặc phép xét vẫn theo tên sao`);
 }
 
-console.log(`✓ 格局四化加分项按 siHua 判定（触发盘数：${[...hits].map(([k, v]) => `${k} ${v}`).join('、')}）`);
+console.log(`✓ Điều kiện cộng điểm Tứ Hóa của cách cục xét theo siHua (số lá số kích hoạt: ${[...hits].map(([k, v]) => `${k} ${v}`).join(', ')})`);
 }
 
 main().catch((err) => {

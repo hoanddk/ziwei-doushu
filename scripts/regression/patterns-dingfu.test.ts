@@ -44,7 +44,7 @@ assert.equal(DING_FU_JUDGEABLE, 4, '可判定条目应为 4 条（6 - 2 无解�
 assert.equal(DING_FU_UNREACHABLE.length, 2, '安星无解的条目应为 2 条');
 assert.deepEqual(
   DING_FU_UNREACHABLE.map(g => g.name).sort(),
-  ['财荫夹印', '荫印拱身'].sort(),
+  ['Tài Ấm giáp Ấn', 'Ấm Ấn củng Thân'].sort(),
   '无解条目清单变动须同步更新文档与几何理由',
 );
 for (const g of DING_FU_UNREACHABLE) {
@@ -134,10 +134,10 @@ assert.ok(
  * 盘面算法若变动导致这些不再命中，测试应当失败，不该放宽。
  */
 const GOLDEN: Array<[number, number, number, number, string]> = [
-  [1990, 1, 5, 0, '日月夹财'],
-  [1993, 1, 25, 3, '财禄夹马'],
-  [1990, 1, 15, 9, '日月照璧'],
-  [1990, 2, 11, 8, '金灿光辉'],
+  [1990, 1, 5, 0, 'Nhật Nguyệt giáp Tài'],
+  [1993, 1, 25, 3, 'Tài Lộc giáp Mã'],
+  [1990, 1, 15, 9, 'Nhật Nguyệt chiếu Bích'],
+  [1990, 2, 11, 8, 'Kim xán quang huy'],
 ];
 
 assert.deepEqual(
