@@ -85,7 +85,17 @@ interface ParsedContent {
 function parseStarContent(content: string): ParsedContent {
   const out: ParsedContent = { dingdiao: '', lundian: '', yiju: '', chuchu: '', raw: content, hasMarkers: false };
   if (!content) return out;
-  if (!content.includes('**【一句话定调】**') && !content.includes('**【核心论断】**')) {
+  // Marker tiếng Việt (fork Việt hoá) + marker gốc tiếng Trung đều dùng được.
+  // Marker chỉ là mốc tách đoạn, không hiển thị ra trang (tiêu đề mục trên trang
+  // đã là tiếng Việt: "Định tính mệnh cách", "Luận đoán cốt lõi"...).
+  const MARKER_TO_FIELD: Record<string, 'dingdiao' | 'lundian' | 'yiju' | 'chuchu'> = {
+    '一句话定调': 'dingdiao', 'Định tính': 'dingdiao',
+    '核心论断': 'lundian', 'Luận đoán cốt lõi': 'lundian',
+    '命盘依据': 'yiju', 'Căn cứ lá số': 'yiju',
+    '经典出处': 'chuchu', 'Xuất xứ cổ thư': 'chuchu',
+  };
+  const hasAnyMarker = Object.keys(MARKER_TO_FIELD).some(m => content.includes(`**【${m}】**`));
+  if (!hasAnyMarker) {
     out.lundian = content;
     return out;
   }
@@ -100,10 +110,8 @@ function parseStarContent(content: string): ParsedContent {
     const p = parts[i];
     const end = i + 1 < parts.length ? parts[i + 1].start : content.length;
     const text = content.slice(p.markerEnd, end).trim();
-    if (p.name === '一句话定调') out.dingdiao = text;
-    else if (p.name === '核心论断') out.lundian = text;
-    else if (p.name === '命盘依据') out.yiju = text;
-    else if (p.name === '经典出处') out.chuchu = text;
+    const field = MARKER_TO_FIELD[p.name];
+    if (field) out[field] = text;
   }
   return out;
 }

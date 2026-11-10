@@ -4,6 +4,7 @@ import BirthForm from '@/components/BirthForm';
 import ChartBoard from '@/components/ChartBoard';
 import InsightPanel from '@/components/InsightPanel';
 import RuleSummary from '@/components/RuleSummary';
+import ChartReading from '@/components/ChartReading';
 import PalaceDetailPanel from '@/components/PalaceDetailPanel';
 import TimeNav, { type TimeView } from '@/components/TimeNav';
 import { generateChart } from '@/lib/ziwei/algorithm';
@@ -78,6 +79,11 @@ export default function ChartPage() {
       {/* Tóm lược theo quy tắc cổ thư：không qua AI，nằm dưới bàn cờ */}
       <div style={{ marginTop: 20 }}>
         <RuleSummary chart={chart} />
+      </div>
+
+      {/* Luận giải đầy đủ theo quy tắc cổ thư：không qua AI，theo năm lưu niên đang chọn */}
+      <div style={{ marginTop: 20 }}>
+        <ChartReading chart={chart} liunianYear={liunianYear} />
       </div>
     </main>
   );
