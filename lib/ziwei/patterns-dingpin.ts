@@ -70,8 +70,8 @@ export interface DingPinGe {
 export const DING_PIN_GE: DingPinGe[] = [
   {
     no: 1,
-    name: '生不逢时',
-    note: '命坐空亡逢廉贞是也',
+    name: 'Sinh bất phùng thời',
+    note: 'Mệnh tọa Không Vong gặp Liêm Trinh là vậy',
     status: 'derivable',
     inProject: 'none',
     fn: c => {
@@ -81,8 +81,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 2,
-    name: '禄逢两杀',
-    note: '禄坐空亡又逢空劫杀星是也',
+    name: 'Lộc phùng lưỡng sát',
+    note: 'Lộc tọa Không Vong lại gặp Không Kiếp sát tinh là vậy',
     status: 'derivable',
     inProject: 'none',
     // 「两杀」取严读法：地空地劫双至（同宫）。安星上空劫同宫只出现在
@@ -99,8 +99,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 3,
-    name: '马落空亡',
-    note: '马既落亡，虽禄冲会无用，主奔波',
+    name: 'Mã lạc Không Vong',
+    note: 'Mã đã lạc vong, dù Lộc xung hội cũng vô dụng, chủ bôn ba',
     status: 'disputed',
     inProject: 'none',
     // 取守命读法：天马守命且命宫坐空亡（4.10%）。
@@ -119,8 +119,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 4,
-    name: '日月藏辉',
-    note: '日月反背又逢巨暗是也',
+    name: 'Nhật Nguyệt tàng huy',
+    note: 'Nhật Nguyệt phản bối lại gặp Cự ám là vậy',
     status: 'disputed',
     inProject: 'none',
     // 严读法（太阳、太阴、巨门三者皆落陷）17,280 盘 0 次：三颗星的「陷」档
@@ -144,8 +144,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 5,
-    name: '财与囚仇',
-    note: '武贞同守身命是也',
+    name: 'Tài dữ Tù cừu',
+    note: 'Vũ Trinh đồng thủ Thân Mệnh là vậy',
     status: 'derivable',
     inProject: 'none',
     // 武曲与廉贞宫距恒为 4（永不同宫），「同守」只能是分守身、命两宫。
@@ -162,8 +162,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 6,
-    name: '一生孤贫',
-    note: '谓破守命星陷地是也',
+    name: 'Nhất sinh cô bần',
+    note: 'Nói Phá thủ Mệnh, sao lạc hãm địa là vậy',
     status: 'derivable',
     inProject: 'none',
     fn: c => {
@@ -173,8 +173,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 7,
-    name: '君子在野',
-    note: '谓四杀守身命而言临陷地是也',
+    name: 'Quân tử tại dã',
+    note: 'Nói tứ sát thủ Thân Mệnh mà lâm hãm địa là vậy',
     status: 'disputed',
     inProject: 'none',
     // 严读法（擎羊陀罗火星铃星四星全部落在身、命两宫）17,280 盘 0 次：
@@ -195,8 +195,8 @@ export const DING_PIN_GE: DingPinGe[] = [
   },
   {
     no: 8,
-    name: '两重华盖',
-    note: '谓禄存化禄坐命遇空劫是也',
+    name: 'Lưỡng trùng Hoa Cái',
+    note: 'Nói Lộc Tồn Hóa Lộc tọa Mệnh gặp Không Kiếp là vậy',
     status: 'derivable',
     inProject: 'none',
     // 「两重」取严读法：禄存与化禄双禄同坐命（0.60%），再遇空劫（0.064%）。

@@ -24,7 +24,7 @@ export const VI_PALACE: Record<string, string> = {
   '田宅宫': 'Điền Trạch',
   '福德宫': 'Phúc Đức',
   '父母宫': 'Phụ Mẫu',
-  // Dạng rút gọn không chữ "cung" (dùng trong TOPIC_PALACE_NAME của db-analysis.ts:
+  '身宫': 'Thân',
   // iztro gọi cung Nô Bộc là "仆役", các cung khác bỏ chữ "cung")
   '兄弟': 'Huynh Đệ',
   '夫妻': 'Phu Thê',
@@ -37,6 +37,7 @@ export const VI_PALACE: Record<string, string> = {
   '田宅': 'Điền Trạch',
   '福德': 'Phúc Đức',
   '父母': 'Phụ Mẫu',
+  '身': 'Thân',
 };
 
 /** 12 cung — tên rút gọn (không chữ "cung"), dùng ở các thẻ tóm tắt */
@@ -53,6 +54,7 @@ export const VI_PALACE_SHORT: Record<string, string> = {
   '田宅宫': 'Điền Trạch',
   '福德宫': 'Phúc Đức',
   '父母宫': 'Phụ Mẫu',
+  '身宫': 'Thân',
 };
 
 /** 14 sao chính */
