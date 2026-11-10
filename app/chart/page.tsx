@@ -3,6 +3,8 @@ import { useState } from 'react';
 import BirthForm from '@/components/BirthForm';
 import ChartBoard from '@/components/ChartBoard';
 import InsightPanel from '@/components/InsightPanel';
+import RuleSummary from '@/components/RuleSummary';
+import PalaceDetailPanel from '@/components/PalaceDetailPanel';
 import TimeNav, { type TimeView } from '@/components/TimeNav';
 import { generateChart } from '@/lib/ziwei/algorithm';
 import type { BirthInfo, ZiweiChart, Palace } from '@/lib/ziwei/types';
@@ -66,8 +68,16 @@ export default function ChartPage() {
           gap: 20, marginTop: 16, alignItems: 'start',
         }}
       >
-        <ChartBoard chart={chart} onPalaceSelect={setSelectedPalace} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, minWidth: 0 }}>
+          <ChartBoard chart={chart} onPalaceSelect={setSelectedPalace} />
+          <PalaceDetailPanel palace={selectedPalace} chart={chart} />
+        </div>
         <InsightPanel chart={chart} selectedPalace={selectedPalace} />
+      </div>
+
+      {/* Tóm lược theo quy tắc cổ thư：không qua AI，nằm dưới bàn cờ */}
+      <div style={{ marginTop: 20 }}>
+        <RuleSummary chart={chart} />
       </div>
     </main>
   );

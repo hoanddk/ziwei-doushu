@@ -130,7 +130,8 @@ Cách tương tác với người khác, phong cách đối nhân xử thế.
 Ưu thế thiên phú, cùng những bài học đời người cần đối mặt.`,
 };
 
-const PALACE_ROLES: Record<string, string> = {
+/** Ý nghĩa từng cung (dùng chung cho InsightPanel và PalaceDetailPanel) */
+export const PALACE_ROLES: Record<string, string> = {
   '命宫':   'Bản thân, tính cách, cục diện tiên thiên',
   '兄弟宫': 'Quan hệ anh em, đối tác',
   '夫妻宫': 'Quan hệ tình cảm, tình trạng hôn nhân',

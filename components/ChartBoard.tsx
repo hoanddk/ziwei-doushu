@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ZiweiChart, Palace, Star } from '@/lib/ziwei/types';
 import { BRANCHES, STEMS } from '@/lib/ziwei/constants';
-import { VI_BRANCH, VI_JU, VI_PALACE } from '@/lib/ziwei/vi-names';
+import { VI_BRANCH, VI_JU, VI_PALACE, VI_STAR, VI_STEM } from '@/lib/ziwei/vi-names';
 import PalaceCell from './PalaceCell';
 import TimeNav, { type TimeView, getYearStemIndex, buildSiHuaOverlay } from './TimeNav';
 
@@ -57,6 +57,9 @@ export default function ChartBoard({ chart, onStarSelect, onPalaceSelect, onSiHu
   const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
   const [timeView, setTimeView] = useState<TimeView>('mingpan');
   const [liunianYear, setLiunianYear] = useState<number>(new Date().getFullYear());
+  // Chiếu Sao (tam phương tứ chính)：bật thì bấm cung sẽ vẽ đường + tô sáng
+  // các cung liên quan；tắt thì chỉ đổi khung chi tiết bên dưới.
+  const [showSanFang, setShowSanFang] = useState(true);
 
   const palaceMap: Record<number, Palace> = {};
   chart.palaces.forEach(p => { palaceMap[p.branch] = p; });
@@ -85,8 +88,11 @@ export default function ChartBoard({ chart, onStarSelect, onPalaceSelect, onSiHu
   };
 
   // 三方四正
-  const sanFangBranches = selectedBranch !== null ? getSanFangSiZheng(selectedBranch) : null;
+  const sanFangBranches = showSanFang && selectedBranch !== null ? getSanFangSiZheng(selectedBranch) : null;
   const sanFangSet = sanFangBranches ? new Set(sanFangBranches) : null;
+
+  const toViGanzhi = (s: string) => [...s].map(ch => VI_STEM[ch] ?? VI_BRANCH[ch] ?? ch).join('');
+  const utcLabel = chart.birthInfo.utcOffsetMinutes === 420 ? 'UTC+7' : 'UTC+8';
 
   return (
     <div className="w-full select-none">
@@ -111,6 +117,19 @@ export default function ChartBoard({ chart, onStarSelect, onPalaceSelect, onSiHu
         <h2 className="text-sm tracking-[0.25em] font-medium" style={{ color: 'var(--t-gold)' }}>
           {chart.birthInfo.name ? `${chart.birthInfo.name} · ` : ''}Lá số Tử Vi Đẩu Số
         </h2>
+        <button
+          type="button"
+          onClick={() => setShowSanFang(v => !v)}
+          title="Bật/tắt đường chiếu Tam Hợp và Xung Chiếu khi bấm vào một cung"
+          style={{
+            marginTop: 6, padding: '3px 10px', cursor: 'pointer', fontSize: 10,
+            borderRadius: 999, border: `1px solid ${showSanFang ? 'rgba(37,99,235,0.5)' : 'var(--t-border)'}`,
+            background: showSanFang ? 'rgba(37,99,235,0.08)' : 'transparent',
+            color: showSanFang ? '#60a5fa' : 'var(--t-faint)',
+          }}
+        >
+          📐 Chiếu Sao {showSanFang ? 'BẬT' : 'TẮT'}
+        </button>
       </motion.div>
 
       {/* 4x4 命盘网格（含 SVG 叠加层） */}
@@ -164,6 +183,21 @@ export default function ChartBoard({ chart, onStarSelect, onPalaceSelect, onSiHu
               <div>Cung Mệnh <span style={{ color: 'var(--t-gold)', opacity: 0.7 }}>{VI_BRANCH[BRANCHES[chart.mingGongBranch]] ?? BRANCHES[chart.mingGongBranch]}</span></div>
               <div>Cung Thân <span className="text-sky-500/70">{VI_BRANCH[BRANCHES[chart.shenGongBranch]] ?? BRANCHES[chart.shenGongBranch]}</span></div>
               <div className="text-[9px]" style={{ color: 'var(--t-gold)', opacity: 0.75 }}>{VI_JU[chart.wuxingJuName] ?? chart.wuxingJuName}</div>
+              {chart.mingZhu && (
+                <div>Chủ Mệnh <span style={{ color: 'var(--t-gold)', opacity: 0.7 }}>{VI_STAR[chart.mingZhu] ?? chart.mingZhu}</span></div>
+              )}
+              {chart.shenZhu && (
+                <div>Chủ Thân <span className="text-sky-500/70">{VI_STAR[chart.shenZhu] ?? chart.shenZhu}</span></div>
+              )}
+              {chart.yinYangGender && (
+                <div>{{ '阳男': 'Dương Nam', '阴男': 'Âm Nam', '阳女': 'Dương Nữ', '阴女': 'Âm Nữ' }[chart.yinYangGender] ?? chart.yinYangGender}</div>
+              )}
+              {chart.lunarInfo.fourPillars && (
+                <div className="font-mono">Tứ Trụ {chart.lunarInfo.fourPillars.map(toViGanzhi).join(' ')}</div>
+              )}
+              {chart.birthInfo.trueSolarClock && (
+                <div>Giờ chân thái dương {chart.birthInfo.trueSolarClock} ({utcLabel})</div>
+              )}
             </div>
           </div>
 
@@ -280,6 +314,21 @@ export default function ChartBoard({ chart, onStarSelect, onPalaceSelect, onSiHu
         <span className="px-1.5 py-0.5 rounded-full" style={{ color: 'var(--t-faint)', border: '1px solid var(--t-border)' }}>
           Bấm vào cung để xem tam phương tứ chính
         </span>
+      </motion.div>
+
+      {/* 图例：亮度 + 大限年龄 */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.75 }}
+        className="mt-2 flex items-center justify-center gap-2 text-[9px] flex-wrap"
+        style={{ color: 'var(--t-faint)' }}
+      >
+        <span>
+          Độ sáng trong [ ]: Miếu · Vượng · Đắc · Lợi · Bình · Bất · Nhàn · Hãm · Địa
+        </span>
+        <span style={{ opacity: 0.6 }}>·</span>
+        <span>Số ở góc trên mỗi cung = khoảng tuổi đại hạn (ví dụ 12–21)</span>
       </motion.div>
     </div>
   );
