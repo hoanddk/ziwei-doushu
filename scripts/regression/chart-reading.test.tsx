@@ -8,7 +8,7 @@
  *   KHÔNG trùng cung Mệnh gốc — bài học 10/11: đọc nhầm chi 7 thành Ngọ.
  * - Không còn cụm lặp "có sao chính không có sao chính" ở cung trống
  *   (lỗi câu dẫn đã sửa cùng đợt).
- * - Ba lá số khác nhau đều render đủ 9 mục, không ném lỗi.
+ * - Ba lá số khác nhau đều render đủ 10 mục, không ném lỗi.
  */
 import assert from 'node:assert/strict';
 import * as React from 'react';
@@ -51,7 +51,7 @@ assert.ok(!t1.includes('có sao chính không có sao chính'), 'Không còn c�
 // Tài Bạch trống, mượn từ Phúc Đức.
 assert.ok(t1.includes('cung trống, mượn sao chính cung đối'), 'Tài Bạch trống phải ghi rõ mượn từ cung đối');
 
-// ── 2) Hai lá số khác: đủ 9 mục, không lỗi ─────────────────────────────
+// ── 2) Hai lá số khác: đủ 10 mục, không lỗi ─────────────────────────────
 const others: [Parameters<typeof formToBirthInfo>[0], number][] = [
   [{ name: 'Test Nữ', year: '1990', month: '3', day: '15', clockHour: '14', clockMinute: '0', unknownTime: false, province: 'Việt Nam', city: 'TP.HCM', longitude: 106.7, gender: 'female' }, 2026],
   [{ name: 'Test 2000', year: '2000', month: '11', day: '11', clockHour: '23', clockMinute: '30', unknownTime: false, province: 'Việt Nam', city: 'Hà Nội', longitude: 105.85, gender: 'male' }, 2026],
@@ -59,7 +59,7 @@ const others: [Parameters<typeof formToBirthInfo>[0], number][] = [
 for (const [form, year] of others) {
   const t = renderText(form, year);
   assert.ok(t.includes('Luận giải theo quy tắc'), 'Thiếu tiêu đề luận giải');
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 1; i <= 10; i++) {
     assert.ok(t.includes(`${i} · `), `Thiếu mục ${i}`);
   }
   assert.ok(!t.includes('có sao chính không có sao chính'), 'Không còn cụm lặp ở cung trống');
