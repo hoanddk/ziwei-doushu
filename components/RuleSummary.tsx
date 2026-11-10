@@ -5,6 +5,7 @@ import { getMingGongSummary } from '@/lib/ziwei/ming-summary';
 import { detectDingGui } from '@/lib/ziwei/patterns-dinggui';
 import { detectDingFu } from '@/lib/ziwei/patterns-dingfu';
 import { detectDingPin } from '@/lib/ziwei/patterns-dingpin';
+import { CAREER_HINTS } from '@/lib/ziwei/career-hints';
 import {
   VI_BRIGHTNESS, VI_JU, VI_KEYWORD, VI_NATURE, VI_PALACE,
   VI_SIHUA, VI_STAR,
@@ -51,26 +52,6 @@ function starLabel(s: Star): string {
 function findStarPalaces(chart: ZiweiChart, starName: string): Palace[] {
   return chart.palaces.filter(p => p.stars.some(s => s.name === starName));
 }
-
-// Gợi ý ngành nghề theo sao chủ cung Quan Lộc — bảng quy ước thường gặp
-// trong sách cổ, chỉ để tham khảo hướng, không phải kết luận. Chỉ hiện
-// với sao đang có mặt trên lá số này.
-const CAREER_HINTS: Record<string, string[]> = {
-  '紫微': ['Quản lý, lãnh đạo', 'Hành chính, tổ chức'],
-  '天机': ['Mưu tính, tham mưu', 'Công nghệ, phân tích dữ liệu'],
-  '太阳': ['Giáo dục, truyền thông', 'Dịch vụ công, đối ngoại'],
-  '武曲': ['Tài chính, ngân hàng', 'Kinh doanh, thương mại'],
-  '天同': ['Dịch vụ, chăm sóc', 'Nghệ thuật, giải trí'],
-  '廉贞': ['Nghệ thuật, sáng tạo', 'Luật, thanh tra'],
-  '天府': ['Tài chính, kho vận', 'Quản trị, hành chính'],
-  '太阴': ['Tài chính, bất động sản', 'Dịch vụ, chăm sóc'],
-  '贪狼': ['Kinh doanh, ngoại giao', 'Nghệ thuật, truyền thông'],
-  '巨门': ['Ngôn luận, giảng dạy', 'Luật, nghiên cứu'],
-  '天相': ['Phụ tá, hành chính', 'Tài chính, kế toán'],
-  '天梁': ['Y tế, giáo dục', 'Phúc lợi, cố vấn'],
-  '七杀': ['Quân sự, công an', 'Kỹ thuật, quản lý dự án'],
-  '破军': ['Khởi nghiệp, đổi mới', 'Kỹ thuật, logistics'],
-};
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
