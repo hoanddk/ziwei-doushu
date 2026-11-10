@@ -7,6 +7,8 @@ import { detectDingFu } from '@/lib/ziwei/patterns-dingfu';
 import { detectDingPin } from '@/lib/ziwei/patterns-dingpin';
 import { CAREER_HINTS } from '@/lib/ziwei/career-hints';
 import { buildSiHuaOverlay, getYearStemIndex } from '@/components/TimeNav';
+import { getLiuYueMonths } from '@/lib/ziwei/liuyue';
+import { Solar } from 'lunar-javascript';
 import {
   VI_BRANCH, VI_BRIGHTNESS, VI_JU, VI_KEYWORD, VI_NATURE, VI_PALACE,
   VI_SHICHEN, VI_SIHUA, VI_STAR, VI_STEM,
@@ -14,7 +16,7 @@ import {
 
 // ─── Luận giải theo quy tắc cổ thư (ChartReading) ─────────────────────────
 // Ráp bản luận đầy đủ từ chính lá số đã an: sao chính + độ sáng + Tứ Hóa
-// + Lục Cát/Lục Sát + đại hạn + lưu niên + cách cục đã kiểm chứng.
+// + Lục Cát/Lục Sát + đại hạn + lưu niên + lưu nguyệt + cách cục đã kiểm chứng.
 // KHÔNG gọi AI, KHÔNG gọi /api/interpret, chạy được offline.
 //
 // Mọi câu luận đều là câu mẫu cố định, mỗi câu gắn với đúng một điều kiện
@@ -166,6 +168,18 @@ export default function ChartReading({ chart, liunianYear }: { chart: ZiweiChart
     if (!starName) return null;
     return { sh, starName, palace: palaceOfStar(chart, starName) };
   }).filter(Boolean) as { sh: string; starName: string; palace?: Palace }[];
+
+  // Lưu nguyệt năm xem: 12 tháng âm lịch (+ tháng nhuận nếu có).
+  const liuYueMonths = getLiuYueMonths(chart, liunianYear);
+  // Tháng âm lịch hiện tại (để đánh dấu dòng "tháng này").
+  let currentLunarMonth: number | null = null;
+  try {
+    const now = new Date();
+    const nowLunar = Solar.fromYmd(now.getFullYear(), now.getMonth() + 1, now.getDate()).getLunar();
+    if (nowLunar.getYear() === liunianYear) currentLunarMonth = Math.abs(nowLunar.getMonth());
+  } catch {
+    currentLunarMonth = null;
+  }
 
   const hongLoan = findStarPalaces(chart, '红鸾');
   const tianXi = findStarPalaces(chart, '天喜');
@@ -534,12 +548,64 @@ export default function ChartReading({ chart, liunianYear }: { chart: ZiweiChart
         )}
       </Section>
 
+      <Section title={`10 · Lưu nguyệt ${liunianYear} — vận từng tháng`}>
+        <P>
+          Mỗi tháng âm lịch có Can Chi tháng riêng và một cung Lưu nguyệt Mệnh riêng.
+          Cung Mệnh tháng tính theo công thức của engine iztro: chi năm lưu niên
+          trừ tháng sinh âm lịch, cộng giờ sinh, cộng tháng tính. Tháng nào Mệnh
+          tháng trùng cung Mệnh gốc thì tháng đó vận khí “về lại” chính mình.
+          {currentLunarMonth !== null && (
+            <span> Tháng âm lịch hiện tại: tháng {currentLunarMonth}.</span>
+          )}
+        </P>
+        {liuYueMonths.map((m) => {
+          const majors = majorStars(m.mingPalace);
+          const isCurrent = currentLunarMonth === m.lunarMonth && !m.isLeap;
+          return (
+            <P key={`${m.lunarMonth}-${m.isLeap ? 'nhuan' : 'chinh'}`}>
+              <strong style={{ color: 'var(--t-text)' }}>
+                Tháng {m.lunarMonth}{m.isLeap ? ' nhuận' : ''} ({VI_STEM[STEMS[m.stem]] ?? STEMS[m.stem]} {VI_BRANCH[BRANCHES[m.branch]] ?? BRANCHES[m.branch]})
+              </strong>
+              {' '}· {m.solarStart}–{m.solarEnd}
+              {isCurrent && <span> · tháng này</span>}
+              {m.isLeap && <span> · nửa đầu theo tháng chính, nửa sau theo tháng sau</span>}
+              <br />
+              Mệnh tháng tại {viPalace(m.mingPalace)}
+              {m.mingPalace && ming && m.mingBranch === ming.branch && (
+                <span> — trùng cung Mệnh gốc</span>
+              )}
+              {majors.length > 0 ? (
+                <span>, sao chính: <Stars stars={majors} emptyText="" /></span>
+              ) : (
+                <span>, cung trống — luận theo sao chính mượn từ cung đối</span>
+              )}
+              .
+              <br />
+              Tứ Hóa tháng:{' '}
+              {m.sihua.map(({ kind, star, palace }, i) => (
+                <span key={kind}>
+                  {i > 0 && ' · '}
+                  <strong style={{ color: 'var(--t-text)' }}>{VI_STAR[star] ?? star}</strong>
+                  {' '}Hóa {VI_SIHUA[kind] ?? kind}
+                  {palace ? ` tại ${viPalace(palace)}` : ''}
+                </span>
+              ))}
+              .
+            </P>
+          );
+        })}
+        <P style={{ color: 'var(--t-faint)', fontStyle: 'italic' }}>
+          Lưu ý: luận tháng chỉ nói cung nào động và sao nào hóa trong tháng đó;
+          cổ thư viết ít về từng tháng nên không có bài luận dài như luận năm.
+        </P>
+      </Section>
+
       <div
         className="text-[10px] leading-relaxed pt-3 mt-1"
         style={{ borderTop: '1px solid var(--t-border)', color: 'var(--t-faint)', opacity: 0.75 }}
       >
         Cách đọc bản luận này: mỗi đoạn gồm (1) dữ liệu trích trực tiếp từ lá số đã an — sao, độ sáng,
-        Tứ Hóa, đại hạn, lưu niên; (2) câu mẫu cố định theo quy tắc cổ thư, mỗi câu chỉ hiện khi lá số
+        Tứ Hóa, đại hạn, lưu niên, lưu nguyệt; (2) câu mẫu cố định theo quy tắc cổ thư, mỗi câu chỉ hiện khi lá số
         có đúng điều kiện đó (ví dụ “Hóa Kỵ tại Mệnh”, “Tài Bạch trống”, “Thân cư Phúc Đức”). Không có
         câu nào do AI tự suy diễn thêm. Bản luận chỉ mang tính tham khảo; bài luận chi tiết từng sao
         từng cung (kho STAR_DB) vẫn đang trống, trừ 1 mục mẫu Tử Vi ở Mệnh.
