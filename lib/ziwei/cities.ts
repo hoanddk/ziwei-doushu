@@ -6,6 +6,11 @@ export interface CityInfo {
 export interface ProvinceInfo {
   name: string;
   cities: CityInfo[];
+  /**
+   * 钟表时间所在时区的标准偏移（分钟，东正西负）：不传 = 480（UTC+8，中央经线 120°）。
+   * 越南 = 420（UTC+7，中央经线 105°）——见 lib/ziwei/share.ts 的 getUtcOffsetMinutes。
+   */
+  utcOffsetMinutes?: number;
 }
 
 // ★ 2026-10-07 用户反馈「出生地点还不够全」→ 补全全国区县（直辖市以外 2724 个，挂在各地级市下）。
@@ -700,21 +705,69 @@ export const PROVINCES: ProvinceInfo[] = [
   },
 
   // ─── 越南（Việt Nam）───────────────────────────────────────
-  //   Người sinh ở Việt Nam: nhập giờ sinh sau khi cộng 1 giờ để đổi sang giờ Bắc Kinh (UTC+8),
-  //   rồi chọn thành phố dưới đây để hiệu chỉnh giờ mặt trời thật theo kinh độ.
+  //   Giờ Việt Nam chuẩn UTC+7 (trung tuyến 105°Đ) — người sinh ở Việt Nam
+  //   NHẬP ĐÚNG GIỜ ĐỒNG HỒ VIỆT NAM, không cộng 1 giờ sang giờ Bắc Kinh nữa.
+  //   Cách cũ (trước 10/11/2026): nhập giờ Bắc Kinh (UTC+8) rồi hiệu chỉnh theo
+  //   kinh độ với trung tuyến 120° — hai cách cho cùng một giờ mặt trời thật
+  //   (kiểm chứng: Hà Nội 07:30 VN = 08:30 Bắc Kinh, cùng ra 07:34),
+  //   nhưng cách cũ dễ nhập sai 1 giờ. LƯU Ý TƯƠNG THÍCH: link chia sẻ tạo
+  //   trước đổi này (giờ Bắc Kinh, không có tham số tz) sẽ được hiểu lại
+  //   theo giờ Việt Nam — lệch 1 giờ. Không giữ đường tương thích cũ vì
+  //   app chưa từng deploy công khai, chưa có link chia sẻ thật nào tồn tại;
+  //   link mới luôn ghi rõ tz (xem lib/ziwei/share.ts).
+  //
+  //   34 đơn vị cấp tỉnh hiện hành sau sáp nhập 01/07/2025 (NQ 202/2025/QH15):
+  //   kinh độ là tọa độ trung tâm thành phố thủ phủ (làm tròn 0,01° ≈ 0,04 phút
+  //   giờ mặt trời — không đáng kể). 5 trung tâm đặt ở thành phố của tỉnh bị
+  //   sáp nhập, theo QĐ 759/QĐ-TTg: Lào Cai→Yên Bái, Bắc Ninh→Bắc Giang,
+  //   Quảng Trị→Đồng Hới, Tây Ninh→Tân An, Đồng Tháp→Mỹ Tho.
+  //   Tên mục trong danh sách là tên THÀNH PHỐ thủ phủ (không phải tên tỉnh):
+  //   ví dụ mục 'Yên Bái' là thủ phủ của tỉnh Lào Cai, 'Bắc Giang' là thủ
+  //   phủ của tỉnh Bắc Ninh, 'Việt Trì' của Phú Thọ, 'Hoa Lư' của Ninh Bình,
+  //   'Hạ Long' của Quảng Ninh.
+  //   2 số đã đính chính ngày 10/11/2026 (nguồn distancefromto.net ghi sai
+  //   điểm trung tâm tỉnh thay cho thành phố): Yên Bái 104.87 (Wikipedia
+  //   21°42′N 104°52′E), Lai Châu 103.44 (Wikipedia 22°23′57″N 103°26′21″E).
+  //   Mục 'Toàn quốc' = chuẩn 105°Đ, dùng khi không rõ thành phố cụ thể.
   {
     name: 'Việt Nam',
+    utcOffsetMinutes: 420,
     cities: [
+      { name: 'Toàn quốc', longitude: 105 },
       { name: 'Hà Nội', longitude: 105.85 },
       { name: 'TP. Hồ Chí Minh', longitude: 106.7 },
-      { name: 'Đà Nẵng', longitude: 108.2 },
+      { name: 'Đà Nẵng', longitude: 108.21 },
       { name: 'Hải Phòng', longitude: 106.68 },
       { name: 'Cần Thơ', longitude: 105.78 },
-      { name: 'Huế', longitude: 107.58 },
-      { name: 'Nha Trang', longitude: 109.19 },
-      { name: 'Đà Lạt', longitude: 108.46 },
-      { name: 'Vinh', longitude: 105.68 },
+      { name: 'Huế', longitude: 107.59 },
+      { name: 'Tuyên Quang', longitude: 105.21 },
+      { name: 'Yên Bái', longitude: 104.87 },
+      { name: 'Thái Nguyên', longitude: 105.85 },
+      { name: 'Việt Trì', longitude: 105.4 },
+      { name: 'Bắc Giang', longitude: 106.19 },
+      { name: 'Hưng Yên', longitude: 106.05 },
+      { name: 'Hoa Lư', longitude: 105.98 },
+      { name: 'Hạ Long', longitude: 107.08 },
+      { name: 'Lai Châu', longitude: 103.44 },
+      { name: 'Điện Biên Phủ', longitude: 103.02 },
+      { name: 'Sơn La', longitude: 103.92 },
+      { name: 'Lạng Sơn', longitude: 106.76 },
+      { name: 'Cao Bằng', longitude: 106.25 },
+      { name: 'Thanh Hóa', longitude: 105.77 },
+      { name: 'Vinh', longitude: 105.69 },
+      { name: 'Hà Tĩnh', longitude: 105.91 },
+      { name: 'Đồng Hới', longitude: 106.6 },
+      { name: 'Quảng Ngãi', longitude: 108.79 },
       { name: 'Quy Nhơn', longitude: 109.23 },
+      { name: 'Buôn Ma Thuột', longitude: 108.04 },
+      { name: 'Nha Trang', longitude: 109.19 },
+      { name: 'Đà Lạt', longitude: 108.44 },
+      { name: 'Biên Hòa', longitude: 106.82 },
+      { name: 'Tân An', longitude: 106.41 },
+      { name: 'Vĩnh Long', longitude: 105.97 },
+      { name: 'Mỹ Tho', longitude: 106.36 },
+      { name: 'Rạch Giá', longitude: 105.08 },
+      { name: 'Cà Mau', longitude: 105.15 },
     ],
   },
 

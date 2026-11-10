@@ -6,7 +6,7 @@ import { SHICHEN } from '@/lib/ziwei/constants';
 import { useTheme } from '@/components/ThemeProvider';
 import { PROVINCES } from '@/lib/ziwei/cities';
 import { VI_SHICHEN } from '@/lib/ziwei/vi-names';
-import { formToBirthInfo, calcTrueSolarBranch } from '@/lib/ziwei/share';
+import { formToBirthInfo, describeTrueSolar, getUtcOffsetMinutes, centralMeridian } from '@/lib/ziwei/share';
 
 export interface BirthFormState {
   name: string;
@@ -19,6 +19,8 @@ export interface BirthFormState {
   province: string;
   city: string;
   longitude: number;
+  /** 钟表时间所在时区的标准偏移（分钟）：越南 420（UTC+7），中国 480（UTC+8）。 */
+  utcOffsetMinutes?: number;
   gender: 'male' | 'female';
 }
 
@@ -44,6 +46,13 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
+  // 默认出生地为越南（本 fork 面向越南用户）：UTC+7，中央经线 105°。
+  // 旧分享链接（province 为 ''）保持原样，不强制改；initialData 有值时以它为准。
+  const initProvince = initialData?.province ?? 'Việt Nam';
+  const initCity = initialData?.city ?? (initProvince === 'Việt Nam' ? 'Toàn quốc' : '');
+  const initLongitude = initialData?.longitude ?? (initProvince === 'Việt Nam' ? 105 : 120);
+  const initUtcOffset = initialData?.utcOffsetMinutes ?? getUtcOffsetMinutes(initProvince);
+
   const [form, setForm] = useState<BirthFormState>({
     name: initialData?.name ?? '',
     year: initialData?.year ?? '',
@@ -52,9 +61,10 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
     clockHour: initialData?.clockHour ?? '8',
     clockMinute: initialData?.clockMinute ?? '0',
     unknownTime: initialData?.unknownTime ?? false,
-    province: initialData?.province ?? '',
-    city: initialData?.city ?? '',
-    longitude: initialData?.longitude ?? 120,
+    province: initProvince,
+    city: initCity,
+    longitude: initLongitude,
+    utcOffsetMinutes: initUtcOffset,
     gender: initialData?.gender ?? 'male',
   });
 
@@ -72,16 +82,27 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
     return prov ? prov.cities : [];
   }, [form.province]);
 
-  const branch = useMemo(() => {
-    if (form.unknownTime) return 0;
-    return calcTrueSolarBranch(
+  // 真太阳时：唯一实现在 lib/ziwei/share.ts 的 describeTrueSolar
+  //（经度修正 + 均时差 NOAA），与提交时 formToBirthInfo 同一口径。
+  // 日期未填全时均时差取 0，只做经度修正。
+  const solar = useMemo(() => {
+    if (form.unknownTime) return null;
+    const y = parseInt(form.year) || 0;
+    const m = parseInt(form.month) || 0;
+    const d = parseInt(form.day) || 0;
+    return describeTrueSolar(
+      y, m, d,
       parseInt(form.clockHour) || 0,
       parseInt(form.clockMinute) || 0,
       form.longitude,
+      form.utcOffsetMinutes ?? getUtcOffsetMinutes(form.province),
     );
-  }, [form.clockHour, form.clockMinute, form.longitude, form.unknownTime]);
+  }, [form.year, form.month, form.day, form.clockHour, form.clockMinute, form.longitude, form.utcOffsetMinutes, form.province, form.unknownTime]);
 
-  const offsetMin = Math.round((form.longitude - 120) * 4);
+  const branch = solar ? solar.branch : 0;
+  const meridian = centralMeridian(form.utcOffsetMinutes ?? getUtcOffsetMinutes(form.province));
+  const isVietnam = (form.utcOffsetMinutes ?? getUtcOffsetMinutes(form.province)) === 420;
+  const offsetMin = Math.round((form.longitude - meridian) * 4);
   const shichenInfo = SHICHEN[branch];
 
   // ─── 校验逻辑 ───────────────────────────────────────────
@@ -123,7 +144,7 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
   const handleProvince = (prov: string) => {
     const provData = PROVINCES.find(p => p.name === prov);
     const firstCity = provData?.cities[0];
-    setForm({ ...form, province: prov, city: firstCity?.name || '', longitude: firstCity?.longitude ?? 120 });
+    setForm({ ...form, province: prov, city: firstCity?.name || '', longitude: firstCity?.longitude ?? 120, utcOffsetMinutes: provData?.utcOffsetMinutes ?? 480 });
   };
 
   const handleCity = (cityName: string) => {
@@ -322,7 +343,7 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
               exit={{ opacity: 0 }}
               style={{ fontSize: '10px', color: isDark ? 'rgba(180,210,235,0.85)' : 'rgba(100,70,10,0.5)', marginTop: '5px' }}
             >
-              {form.city || '(Vui lòng chọn thành phố)'} · Kinh độ {form.longitude.toFixed(1)}°Đ · Chênh lệch {offsetMin > 0 ? '+' : ''}{offsetMin} phút
+              {form.city || '(Vui lòng chọn thành phố)'} · Kinh độ {form.longitude.toFixed(1)}°Đ · Trung tuyến {meridian}°Đ · Lệch kinh độ {offsetMin > 0 ? '+' : ''}{offsetMin} phút
             </motion.p>
           ) : (
             <motion.p
@@ -340,7 +361,7 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
 
       {/* ── 出生时间 ── */}
       <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', fontSize: '11px', color: labelClr, marginBottom: '6px', letterSpacing: '0.05em' }}>Giờ sinh (giờ Bắc Kinh, UTC+8)</label>
+        <label style={{ display: 'block', fontSize: '11px', color: labelClr, marginBottom: '6px', letterSpacing: '0.05em' }}>{isVietnam ? 'Giờ sinh (giờ Việt Nam, UTC+7)' : 'Giờ sinh (giờ Bắc Kinh, UTC+8)'}</label>
         <div style={{ borderRadius: '14px', padding: '12px', background: panelBg, border: `1px solid ${panelBorder}`, opacity: form.unknownTime ? 0.45 : 1, pointerEvents: form.unknownTime ? 'none' : 'auto', transition: 'opacity 0.2s' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '8px' }}>
             <select
@@ -364,7 +385,7 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
           </div>
           {/* 真太阳时结果 */}
           <div style={{ textAlign: 'center', padding: '4px 0' }}>
-            <span style={{ fontSize: '10px', color: isDark ? 'rgba(170,195,220,0.75)' : 'rgba(140,100,20,0.5)' }}>Giờ mặt trời thật → </span>
+            <span style={{ fontSize: '10px', color: isDark ? 'rgba(170,195,220,0.75)' : 'rgba(140,100,20,0.5)' }}>Giờ chân thái dương {solar ? solar.clock : '--:--'} → </span>
             <span style={{ fontSize: '15px', color: goldText, fontWeight: 600, letterSpacing: '0.08em' }}>
               giờ {SHICHEN_NAMES[branch]}
             </span>
@@ -373,7 +394,19 @@ export default function BirthForm({ onSubmit, loading, initialData, onFormSave, 
                 （{shichenInfo.range}）
               </span>
             )}
+            {solar && (
+              <div style={{ fontSize: '10px', color: isDark ? 'rgba(170,195,220,0.75)' : 'rgba(140,100,20,0.5)', marginTop: '2px' }}>
+                Lệch {Math.round(solar.totalCorrectionMinutes) > 0 ? '+' : ''}{Math.round(solar.totalCorrectionMinutes)} phút
+                {' '}(kinh độ {solar.longitudeCorrectionMinutes > 0 ? '+' : ''}{solar.longitudeCorrectionMinutes.toFixed(1)}
+                {' '}· phương trình thời gian {solar.equationOfTimeMinutes > 0 ? '+' : ''}{solar.equationOfTimeMinutes.toFixed(1)})
+              </div>
+            )}
           </div>
+          {isVietnam && (
+            <div style={{ fontSize: '10px', textAlign: 'center', color: isDark ? 'rgba(165,185,210,0.7)' : 'rgba(140,100,20,0.45)', marginTop: '2px' }}>
+              Nhập đúng giờ đồng hồ Việt Nam — không cần cộng 1 giờ sang giờ Bắc Kinh nữa
+            </div>
+          )}
         </div>
         <label style={{ display: 'flex', alignItems: 'center', gap: '7px', marginTop: '8px', cursor: 'pointer' }}>
           <input
