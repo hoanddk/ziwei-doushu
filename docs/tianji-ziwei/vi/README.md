@@ -22,9 +22,10 @@ Dịch theo từng lô nhỏ, mỗi lô một file, anh Hoàn duyệt từng lô
 
 | Lô | Trích dẫn | Bài | Trạng thái |
 |----|-----------|-----|------------|
-| 01 | #1–#10 | 2上 | Chờ duyệt |
+| 01 | #1–#10 | 2上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
+| 02 | #11–#20 | 2上 | Chờ duyệt |
 
-**Đã dịch:** 10 / 1.848. **Lô tiếp theo:** #11–#20, cùng bài 2上.
+**Đã dịch:** 20 / 1.848. **Lô tiếp theo:** #21–#30, cùng bài 2上.
 
 ## Cách duyệt một lô
 
