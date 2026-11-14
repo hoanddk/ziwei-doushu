@@ -37,9 +37,10 @@ Dịch theo từng lô nhỏ, mỗi lô một file, anh Hoàn duyệt từng lô
 | 13 | #121–#130 | 2上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 14 | #131–#140 | 2上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 15 | #141–#150 | 2上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
-| 16 | #151–#160 | 2上 | Chờ duyệt |
+| 16 | #151–#160 | 2上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
+| 17 | #161–#170 | 2上 | Chờ duyệt |
 
-**Đã dịch:** 160 / 1.848. **Lô tiếp theo:** 17 (#161–#170), cùng bài 2上.
+**Đã dịch:** 170 / 1.848. **Lô tiếp theo:** 18 (#171–#180), cùng bài 2上.
 
 ## Cách duyệt một lô
 
