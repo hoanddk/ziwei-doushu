@@ -2,7 +2,7 @@
 
 Thư mục này chứa bản dịch tiếng Việt của 1.848 trích dẫn 倪海厦《天纪·紫微斗数》原话
 trong `docs/tianji-ziwei/` (nguồn: `entries.jsonl`, 14 bài 2上–15上 + 2 đoạn bổ sung).
-Dịch theo từng lô nhỏ, mỗi lô một file, anh Hoàn duyệt từng lô rồi mới làm lô sau.
+Dịch theo từng lô nhỏ, mỗi lô một file. Từ lô 24 (14/11/2026): đẩy thẳng lên main, bỏ bước PR; anh Hoàn xem lại sau khi đã lên main.
 
 ## Quy tắc
 
@@ -13,8 +13,7 @@ Dịch theo từng lô nhỏ, mỗi lô một file, anh Hoàn duyệt từng lô
 - **Giấy phép:** CC BY-NC-SA 4.0 — chỉ dùng cho mục đích cá nhân, không dùng thương mại;
   bản dịch là tác phẩm phái sinh, giữ cùng giấy phép và ghi nguồn Thiên Kỷ.
   Xem `docs/tianji-ziwei/LICENSE.md`.
-- **Không lô nào được coi là xong trước khi anh Hoàn duyệt.** Lô chưa duyệt thì
-  lô sau chưa bắt đầu.
+- **Từ lô 24: đẩy thẳng lên main, không qua PR.** Anh Hoàn xem lại sau khi lô đã lên main.
 - Bản dịch do AI soạn, chưa qua kiểm chứng chuyên môn. Điểm chưa chốt về lịch
   và tên cách cục giữ nguyên, không tự ý đổi trong lúc dịch.
 
@@ -44,9 +43,10 @@ Dịch theo từng lô nhỏ, mỗi lô một file, anh Hoàn duyệt từng lô
 | 20 | #191–#200 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 21 | #201–#210 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 22 | #211–#220 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
-| 23 | #221–#230 | 3上 | Chờ duyệt |
+| 23 | #221–#230 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
+| 24 | #231–#240 | 3上 | Đã đẩy thẳng lên main ngày 14/11/2026 |
 
-**Đã dịch:** 230 / 1.848. **Lô tiếp theo:** 24 (#231–#240), cùng bài 3上.
+**Đã dịch:** 240 / 1.848. **Lô tiếp theo:** 25 (#241–#250), cùng bài 3上.
 
 ## Cách duyệt một lô
 
