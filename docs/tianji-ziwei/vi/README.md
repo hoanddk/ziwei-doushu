@@ -45,8 +45,9 @@ Dịch theo từng lô nhỏ, mỗi lô một file. Từ lô 24 (14/11/2026): đ
 | 22 | #211–#220 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 23 | #221–#230 | 3上 | Đã duyệt — đã gộp vào main ngày 14/11/2026 |
 | 24 | #231–#240 | 3上 | Đã đẩy thẳng lên main ngày 14/11/2026 |
+| 25 | #241–#250 | 3上 | Đã đẩy thẳng lên main ngày 14/11/2026 |
 
-**Đã dịch:** 240 / 1.848. **Lô tiếp theo:** 25 (#241–#250), cùng bài 3上.
+**Đã dịch:** 250 / 1.848. **Lô tiếp theo:** 26 (#251–#260), cùng bài 3上.
 
 ## Cách duyệt một lô
 
